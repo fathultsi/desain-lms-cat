@@ -205,6 +205,70 @@ a{text-decoration:none;color:inherit}
 .dir--c .dopt{border-color:#E7E9F6}
 .dir--c .dnav__links{color:#69708F}
 
+/* ============================ D · NAVY & GOLD ============================ */
+.dir--d{
+  --d-bg:#061A2F; --d-fg:#EAF3FC; --d-muted:#A9C0D4;
+  --d-surface:rgba(255,255,255,.06); --d-line:rgba(255,255,255,.14); --d-track:rgba(255,255,255,.13);
+  --d-accent:#F5B700; --d-accent-fg:#231A00; --d-2:#7FB4E8; --d-2-fg:#04203A;
+  --d-ok:#4ADE9B; --d-ok-bg:rgba(74,222,155,.15);
+  --d-warn:#FFD34D; --d-warn-bg:rgba(245,183,0,.15);
+  --d-radius:26px; --d-btn-r:999px; --d-badge-r:8px; --d-bar-r:99px;
+  --d-border:1px solid rgba(255,255,255,.14);
+  --d-shadow:0 34px 80px -34px rgba(3,12,22,.9);
+  --d-font:"Plus Jakarta Sans",system-ui,sans-serif;
+  --d-display:"Plus Jakarta Sans",system-ui,sans-serif;
+  --d-h1-w:800; --d-h1-tr:-.03em; --d-h1-size:clamp(25px,3.1vw,38px);
+  --d-opt-bg:rgba(255,255,255,.04); --d-opt-on-bg:rgba(245,183,0,.10);
+  --d-mark-r:9px;
+}
+.dir--d::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(900px 460px at 84% -14%, rgba(245,183,0,.22), transparent 62%),
+    radial-gradient(760px 420px at 4% 4%, rgba(35,120,190,.32), transparent 60%),
+    linear-gradient(165deg,#08213A 0%,#061A2F 58%,#03101C 100%);
+}
+.dir--d::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 22%,transparent 76%);
+  mask-image:radial-gradient(120% 90% at 50% 0%,#000 22%,transparent 76%);
+}
+.dir--d .dnav{border-bottom-color:rgba(255,255,255,.12)}
+.dir--d .deyebrow{
+  color:#FFD34D; background:rgba(245,183,0,.10);
+  border:1px solid rgba(245,183,0,.34); border-radius:999px;
+  padding:7px 13px; letter-spacing:.13em;
+}
+.dir--d .deyebrow::before{display:none}
+.dir--d .dh1 .hl{
+  color:var(--d-accent);
+  box-shadow:inset 0 -.17em 0 rgba(245,183,0,.32);
+  padding-inline:.04em;
+}
+.dir--d .dbtn--primary{
+  box-shadow:0 10px 24px rgba(245,183,0,.30);
+}
+.dir--d .dbtn--primary:hover{background:#FFD34D;box-shadow:0 16px 34px rgba(245,183,0,.40)}
+.dir--d .dbtn--outline{border:1.5px solid rgba(255,255,255,.34)}
+.dir--d .dbtn--outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6)}
+.dir--d .dcard{
+  background:linear-gradient(180deg,rgba(12,38,63,.92),rgba(5,22,40,.88));
+  border:1px solid rgba(255,255,255,.16);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  box-shadow:0 30px 70px -30px rgba(3,12,22,.85), inset 0 1px 0 rgba(255,255,255,.10);
+}
+.dir--d .dcard__top{border-bottom-color:rgba(255,255,255,.13)}
+.dir--d .dring__in{background:#0A2138}
+.dir--d .dbadge{background:rgba(245,183,0,.12);border-color:rgba(245,183,0,.34);color:#FFD34D}
+.dir--d .dchip{background:rgba(245,183,0,.14);color:#FFD34D}
+.dir--d .dinput{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.16)}
+.dir--d .dinput:focus{outline:none;border-color:rgba(245,183,0,.6);box-shadow:0 0 0 3px rgba(245,183,0,.14)}
+.dir--d .dopt.is-on{box-shadow:0 0 0 3px rgba(245,183,0,.14)}
+.dir--d .dkit__k{color:#8FA9C2}
+
 /* ============================ COMPARE / RECO ============================ */
 .rec{padding:clamp(36px,5vw,64px) 0 clamp(48px,6vw,80px);background:#fff;border-top:1px solid #E2E4E9}
 .rec h2{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(22px,3vw,32px);letter-spacing:-.03em}
@@ -230,9 +294,9 @@ table.cmp td:first-child{font-weight:700;color:#16181D;white-space:nowrap}
 
 <header class="page-head">
   <div class="wrap">
-    <span class="kicker">Eksplorasi arah · 3 opsi</span>
-    <h1>Tiga arah desain untuk LMS-CAT.</h1>
-    <p>Konten, angka, dan struktur halaman sengaja dibuat identik di ketiganya — yang berubah hanya warna, tipografi, dan bahasa bentuk. Jadi yang kamu nilai benar-benar visualnya, bukan isinya.</p>
+    <span class="kicker">Eksplorasi arah · 4 opsi</span>
+    <h1>Empat arah desain untuk LMS-CAT.</h1>
+    <p>Konten, angka, dan struktur halaman sengaja dibuat identik di keempatnya — yang berubah hanya warna, tipografi, dan bahasa bentuk. Jadi yang kamu nilai benar-benar visualnya, bukan isinya. Arah D mengikuti referensi yang kamu kirim.</p>
   </div>
 </header>
 
@@ -491,6 +555,91 @@ table.cmp td:first-child{font-weight:700;color:#16181D;white-space:nowrap}
   </div>
 </section>
 
+<!-- ============================ D ============================ -->
+<div class="dirbar">
+  <div class="wrap dirbar__in">
+    <div>
+      <span class="dirbar__n"><b>D</b> Dari referensi kamu</span>
+      <h2>Navy &amp; Gold</h2>
+      <p>Mengikuti referensi yang kamu kirim: biru dongker dalam, emas sebagai aksen tunggal, tombol pil dengan glow, dan kartu kaca di atas latar gelap. Bahasa visual halaman penjualan — dibuat untuk meyakinkan, bukan hanya memperkenalkan.</p>
+    </div>
+    <div class="dirbar__meta">
+      <div><b>Cocok untuk</b> — konversi langsung, audiens yang sudah terbiasa halaman promo, kesan “produk siap beli”.</div>
+      <div><b>Risiko</b> — mudah terasa seperti iklan; kalau dipakai untuk layar ujian, emas harus dikurangi drastis agar tidak mengganggu fokus.</div>
+      <div class="sw">
+        <i style="background:#061A2F"></i><i style="background:#F5B700"></i><i style="background:#FFD34D"></i><i style="background:#7FB4E8"></i><i style="background:#F6F8FB"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="canvas" id="d">
+  <div class="wrap">
+    <div class="canvas__frame">
+      <div class="dir dir--d">
+        <nav class="dnav">
+          <div class="dnav__brand"><span class="dnav__mark"></span> LMS·CAT</div>
+          <div class="dnav__links"><span>Fitur</span><span>Cara Kerja</span><span>Paket</span></div>
+          <div class="dnav__cta">
+            <span class="dbtn dbtn--ghost">Masuk</span>
+            <span class="dbtn dbtn--primary">Daftar</span>
+          </div>
+        </nav>
+
+        <div class="dhero">
+          <div>
+            <span class="deyebrow">Simulasi CAT · SKD CPNS 2027</span>
+            <h2 class="dh1">Nilai tryout mandek.<br>Bukan karena <span class="hl">kurang soal</span>.</h2>
+            <p class="dsub">LMS-CAT membedah setiap jawaban dan setiap detik waktu pengerjaanmu, lalu menyusun prioritas belajar yang jelas.</p>
+            <div class="dcta">
+              <span class="dbtn dbtn--primary dbtn--lg">Mulai Tryout Gratis →</span>
+              <span class="dbtn dbtn--outline dbtn--lg">Lihat contoh analisis</span>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="dcard__top">
+              <span class="dcard__id">Simulasi #4 · SKD</span>
+              <span class="dbadge">Data ilustratif</span>
+            </div>
+            <div class="dscore">
+              <div class="dring"><div class="dring__in"><b>412</b><span>SKOR</span></div></div>
+              <div>
+                <div class="dmeta">Total</div>
+                <div class="ddelta">↑ +38 poin</div>
+              </div>
+            </div>
+            <div class="dbars">
+              <div class="dbar"><span>TWK</span><i><b style="width:63%"></b></i><em>95</em></div>
+              <div class="dbar"><span>TIU</span><i><b class="b2" style="width:64%"></b></i><em>112</em></div>
+              <div class="dbar"><span>TKP</span><i><b class="b3" style="width:91%"></b></i><em>205</em></div>
+            </div>
+            <div class="dchips">
+              <span class="dchip">Deret angka 41%</span>
+              <span class="dchip">Silogisme 48%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dkit">
+          <div class="dkit__item">
+            <span class="dkit__k">Tombol</span>
+            <div class="dkit__row"><span class="dbtn dbtn--primary">Daftar</span><span class="dbtn dbtn--outline">Lihat</span></div>
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Input</span>
+            <input class="dinput" placeholder="nama@email.com">
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Opsi jawaban</span>
+            <div class="dopt is-on"><span>A</span>Pancasila menjadi sumber hukum tertinggi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ COMPARE ============================ -->
 <section class="rec" id="rekomendasi">
   <div class="wrap">
@@ -523,6 +672,13 @@ table.cmp td:first-child{font-weight:700;color:#16181D;white-space:nowrap}
           <td>Paling mudah tertukar dengan aplikasi lain; pembeda lemah</td>
           <td>Aman, tapi kurang “serius”</td>
         </tr>
+        <tr>
+          <td>D · Navy &amp; Gold</td>
+          <td>Berwibawa, hangat, meyakinkan</td>
+          <td>Paling siap menjual: CTA emas langsung terbaca sebagai “ini yang harus diklik”</td>
+          <td>Risiko terasa seperti halaman iklan; emas berlebihan melemahkan kesan serius</td>
+          <td>Perlu versi tenang: emas hanya untuk timer dan aksi</td>
+        </tr>
       </tbody>
     </table>
 
@@ -534,6 +690,11 @@ table.cmp td:first-child{font-weight:700;color:#16181D;white-space:nowrap}
         Ia juga paling sulit ditiru kompetitor, sementara C paling mudah. Layar ujian tetap dibuat terang karena peserta membaca teks panjang
         selama 100 menit; jadi kita memakai latar gelap untuk <i>branding dan data</i>, latar terang untuk <i>membaca</i>.
         Kalau prioritasmu justru konversi sebesar-besarnya dengan risiko paling kecil, pilih C.
+      </p>
+      <p>
+        <b>Catatan untuk D.</b> Navy &amp; Gold paling dekat dengan referensi yang kamu kirim, dan paling cepat memberi kesan “siap dibeli”.
+        Yang saya tidak bawa dari referensi itu: klaim seperti jumlah alumni, testimoni, garansi, dan potongan harga — karena LMS-CAT belum punya datanya.
+        Kalau kamu memilih D, saya sarankan emas dipakai <i>hemat</i>: satu CTA utama, timer, dan penanda prioritas saja.
       </p>
     </div>
   </div>
