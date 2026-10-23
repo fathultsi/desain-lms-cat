@@ -10,153 +10,120 @@
 <link rel="stylesheet" href="../assets/tokens.css">
 <link rel="stylesheet" href="../assets/base.css">
 <style>
-.auth{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
-  min-height:100dvh;
+.auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);min-height:100dvh}
+
+/* ---------------- kolom form ---------------- */
+.auth__form{display:flex;flex-direction:column;padding:24px var(--gutter) 32px;background:var(--white)}
+.auth__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.back{
+  display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);font-weight:700;
+  color:var(--muted);padding:8px 12px;border-radius:var(--r-pill);
 }
-.auth__form-col{
-  display:flex; flex-direction:column;
-  padding:24px var(--gutter) 32px;
-  background:var(--paper-050);
-}
-.auth__top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.auth__back{
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:var(--text-sm); font-weight:600; color:var(--ink-500);
-  padding:8px 10px; margin-right:-10px; border-radius:var(--r-6);
-}
-.auth__back:hover{ color:var(--ink-900); background:var(--paper-200); }
+.back:hover{color:var(--ink);background:var(--cream)}
 
 .auth__body{
-  flex:1; display:flex; flex-direction:column; justify-content:center;
-  width:100%; max-width:408px; margin-inline:auto;
-  padding-block:clamp(2rem,7vh,4.5rem);
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  width:100%;max-width:410px;margin-inline:auto;padding-block:clamp(2rem,7vh,4rem);
 }
-.auth h1{
-  font-size:clamp(1.75rem,2.6vw,2.125rem);
-  letter-spacing:-.03em; line-height:1.1; margin-top:22px;
-}
-.auth__sub{ margin-top:10px; color:var(--ink-500); font-size:.9375rem; line-height:1.55; }
+.auth h1{font-size:clamp(1.6rem,2.4vw,2rem);letter-spacing:-.03em;line-height:1.15;margin-top:20px}
+.auth__sub{margin-top:10px;color:var(--body);font-size:15px;line-height:1.6}
 
-.form{ margin-top:28px; display:grid; gap:18px; }
-.form__row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-.form__link{ font-size:var(--text-sm); font-weight:600; color:var(--blue-700); }
-.form__link:hover{ text-decoration:underline; text-underline-offset:3px; }
+.form{margin-top:26px;display:grid;gap:17px}
+.form__row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.form__link{font-size:var(--text-sm);font-weight:700;color:var(--navy-700)}
+.form__link:hover{text-decoration:underline;text-underline-offset:3px}
 
-.alert{
-  display:flex; gap:10px; padding:12px 14px; border-radius:var(--r-8);
-  font-size:var(--text-sm); line-height:1.5; font-weight:500;
-  border:1px solid;
-}
-.alert--error{ background:var(--rose-100); border-color:#F0C4BC; color:#8E2318; }
-.alert--ok{ background:var(--green-100); border-color:#BFE3D3; color:#0A5F42; }
-.alert[hidden]{ display:none; }
-.alert svg{ flex:none; margin-top:2px; }
+.alert{display:flex;gap:10px;padding:13px 15px;border-radius:var(--r-sm);font-size:var(--text-sm);line-height:1.5;font-weight:600;border:1px solid}
+.alert--error{background:var(--red-100);border-color:#F0C9C9;color:#8E2318}
+.alert--ok{background:var(--green-100);border-color:#BFE3D3;color:#0A5F42}
+.alert svg{flex:none;margin-top:2px}
 
-.auth__alt{
-  margin-top:26px; padding-top:22px; border-top:1px solid var(--line);
-  font-size:.9375rem; color:var(--ink-500); text-align:center;
-}
-.auth__alt a{ font-weight:700; color:var(--blue-700); }
-.auth__alt a:hover{ text-decoration:underline; text-underline-offset:3px; }
+.auth__alt{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:15px;color:var(--body);text-align:center}
+.auth__alt a{font-weight:800;color:var(--navy-700)}
+.auth__alt a:hover{text-decoration:underline;text-underline-offset:3px}
 
-.auth__foot{
-  font-size:var(--text-xs); color:var(--ink-400); line-height:1.5;
-  padding-top:18px; display:flex; gap:14px; flex-wrap:wrap;
-}
-.auth__foot a:hover{ color:var(--ink-700); text-decoration:underline; }
+.auth__foot{font-size:var(--text-xs);color:var(--muted);padding-top:18px;display:flex;gap:14px;flex-wrap:wrap}
+.auth__foot a:hover{color:var(--ink);text-decoration:underline}
 
-/* -------- visual column -------- */
+/* ---------------- kolom visual ---------------- */
 .auth__visual{
-  position:relative; overflow:hidden; background:var(--ink-900); color:var(--text-invert);
-  padding:clamp(2rem,4vw,3.5rem); display:flex; flex-direction:column; justify-content:space-between;
+  position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(2rem,4vw,3.5rem);
+  background:linear-gradient(165deg,var(--navy-800) 0%,var(--navy-950) 62%,#03101C 100%);
+  color:var(--text-invert);
 }
 .auth__visual::before{
-  content:""; position:absolute; inset:0;
-  background-image:linear-gradient(var(--line-invert) 1px, transparent 1px),
-                   linear-gradient(90deg, var(--line-invert) 1px, transparent 1px);
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(800px 420px at 82% -10%,rgba(245,183,0,.22),transparent 62%),
+    radial-gradient(620px 380px at 6% 8%,rgba(35,120,190,.28),transparent 60%);
+}
+.auth__visual::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
   background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(90% 70% at 30% 20%, #000 10%, transparent 75%);
-  mask-image:radial-gradient(90% 70% at 30% 20%, #000 10%, transparent 75%);
-  opacity:.85;
+  -webkit-mask-image:radial-gradient(110% 80% at 40% 10%,#000 20%,transparent 76%);
+  mask-image:radial-gradient(110% 80% at 40% 10%,#000 20%,transparent 76%);
 }
-.auth__visual > *{ position:relative; z-index:1; }
-.visual__top{ display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:var(--text-2xs); letter-spacing:.14em; text-transform:uppercase; color:var(--text-invert-3); }
-.visual__top i{ width:6px; height:6px; background:var(--lime-500); border-radius:50%; }
-.visual__mid{ max-width:420px; }
-.visual__mid h2{
-  font-size:clamp(1.75rem,2.7vw,2.5rem); line-height:1.08; letter-spacing:-.035em; color:var(--text-invert);
-}
-.visual__mid p{ margin-top:14px; color:var(--text-invert-2); font-size:.9375rem; line-height:1.6; max-width:38ch; }
+.auth__visual > *{position:relative;z-index:1}
+.vis__top{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8FA6BC}
+.vis__top i{width:6px;height:6px;border-radius:50%;background:var(--gold-500)}
+.vis__mid{max-width:420px}
+.vis__mid h2{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.2;letter-spacing:-.03em;color:#fff}
+.vis__mid p{margin-top:14px;color:var(--text-invert-2);font-size:14.5px;line-height:1.7;max-width:38ch}
 
 .vcard{
-  margin-top:clamp(1.75rem,4vw,2.75rem);
-  background:var(--surface-invert-2); border:1px solid var(--line-invert);
-  border-radius:var(--r-12); padding:18px; max-width:400px;
+  margin-top:clamp(1.5rem,3.5vw,2.25rem);max-width:400px;
+  background:linear-gradient(180deg,rgba(12,38,63,.9),rgba(5,22,40,.86));
+  border:1px solid rgba(255,255,255,.16);border-radius:var(--r-md);padding:18px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
 }
-.vcard__head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:14px; border-bottom:1px solid var(--line-invert); }
-.vcard__id{ font-family:var(--font-mono); font-size:var(--text-2xs); letter-spacing:.1em; text-transform:uppercase; color:var(--text-invert-3); }
-.vrow{ display:grid; grid-template-columns:38px 1fr 46px; align-items:center; gap:10px; padding-top:12px; }
-.vrow span:first-child{ font-family:var(--font-mono); font-size:var(--text-2xs); font-weight:700; color:var(--text-invert-2); }
-.vrow span:last-child{ font-family:var(--font-mono); font-size:var(--text-2xs); color:var(--text-invert-3); text-align:right; }
-.vbar{ height:5px; background:#2A2F40; border-radius:99px; overflow:hidden; }
-.vbar i{ display:block; height:100%; border-radius:99px; background:var(--lime-500); }
-.vbar i.b{ background:var(--blue-500); }
-.vbar i.a{ background:var(--amber-500); }
-.visual__bottom{ display:grid; gap:10px; }
-.vpoint{ display:flex; gap:10px; align-items:flex-start; font-size:.875rem; color:var(--text-invert-2); }
-.vpoint svg{ flex:none; margin-top:2px; color:var(--lime-500); }
+.vcard__head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.13)}
+.vcard__id{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8FA6BC}
+.vrow{display:grid;grid-template-columns:40px 1fr 36px;align-items:center;gap:10px;padding-top:12px}
+.vrow span:first-child{font-size:11px;font-weight:800;color:#9FB6CB}
+.vrow span:last-child{font-size:11px;font-weight:800;color:#fff;text-align:right;font-variant-numeric:tabular-nums}
+.vbar{height:6px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden}
+.vbar i{display:block;height:100%;border-radius:99px;background:var(--gold-500)}
+.vbar i.b2{background:#7FB4E8}
+.vbar i.b3{background:#4ADE9B}
+.vis__bottom{display:grid;gap:10px}
+.vpoint{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-invert-2);line-height:1.55}
+.vpoint svg{flex:none;margin-top:2px;color:var(--gold-500)}
 
 @media (max-width:980px){
-  .auth{ grid-template-columns:1fr; min-height:100dvh; }
-  .auth__visual{ display:none; }
-  .auth__body{ padding-block:clamp(1.5rem,5vh,2.5rem); }
-  .auth__foot{ justify-content:center; }
+  .auth{grid-template-columns:1fr}
+  .auth__visual{display:none}
+  .auth__foot{justify-content:center}
 }
 
-/* prototype state switcher */
-.devstates{
-  margin-top:26px; border:1px dashed var(--line-strong); border-radius:var(--r-8);
-  background:var(--paper-100); font-size:var(--text-xs);
-}
-.devstates summary{
-  padding:10px 12px; cursor:pointer; font-weight:700; color:var(--ink-500);
-  display:flex; align-items:center; gap:8px; list-style:none;
-}
-.devstates summary::-webkit-details-marker{ display:none; }
-.devstates summary::before{ content:"▸"; color:var(--ink-300); font-size:10px; }
-.devstates[open] summary::before{ content:"▾"; }
-.devstates__body{ padding:0 12px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+/* pratinjau state */
+.devstates{margin-top:24px;border:1px dashed var(--line-strong);border-radius:var(--r-sm);background:var(--cream);font-size:var(--text-xs)}
+.devstates summary{padding:11px 13px;cursor:pointer;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:8px;list-style:none}
+.devstates summary::-webkit-details-marker{display:none}
+.devstates summary::before{content:"▸";font-size:10px;color:var(--muted)}
+.devstates[open] summary::before{content:"▾"}
+.devstates__body{padding:0 13px 13px;display:flex;flex-wrap:wrap;gap:6px}
 .devstates__body button{
-  padding:5px 9px; border-radius:var(--r-4); border:1px solid var(--line-strong);
-  background:var(--surface); font-family:var(--font-mono); font-size:10px;
-  color:var(--ink-600); text-transform:uppercase; letter-spacing:.04em;
+  padding:6px 10px;border-radius:7px;border:1px solid var(--line-strong);background:var(--white);
+  font-size:10.5px;font-weight:800;color:var(--body);letter-spacing:.02em;
 }
-.devstates__body button:hover{ background:var(--ink-900); color:var(--paper-050); border-color:var(--ink-900); }
+.devstates__body button:hover{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
 </style>
 </head>
 <body>
 <div class="auth">
 
-  <!-- ================= FORM COLUMN ================= -->
-  <div class="auth__form-col">
+  <!-- ================= FORM ================= -->
+  <div class="auth__form">
     <div class="auth__top">
       <a class="brand" href="../landing-page/index.html" aria-label="LMS-CAT, kembali ke beranda">
-        <svg class="brand__mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="9" fill="#12141C"/>
-          <g fill="#FAF8F1" opacity=".34">
-            <circle cx="10" cy="10" r="2"/><circle cx="16" cy="10" r="2"/><circle cx="22" cy="10" r="2"/>
-            <circle cx="10" cy="16" r="2"/><circle cx="16" cy="16" r="2"/><circle cx="22" cy="16" r="2"/>
-            <circle cx="10" cy="22" r="2"/><circle cx="16" cy="22" r="2"/>
-          </g>
-          <circle cx="22" cy="22" r="2.6" fill="#D9F24B"/>
-        </svg>
-        <span class="brand__name">LMS<span class="brand__dot">·</span>CAT</span>
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">LMS<i>·</i>CAT</span>
       </a>
-      <a class="auth__back" href="../landing-page/index.html">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M9.5 3.5 5 8l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <a class="back" href="../landing-page/index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Beranda
       </a>
     </div>
@@ -168,27 +135,19 @@
         <p class="auth__sub">Hasil tryout, analisis materi, dan rencana latihanmu tersimpan di satu tempat.</p>
       </div>
 
-      <!-- global error / success -->
       <div class="alert alert--error" id="formAlert" role="alert" hidden>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M8 4.6v4.2M8 11.4v.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-        </svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7.5v5M12 16v.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
         <span id="formAlertText">Email atau kata sandi tidak cocok. Periksa kembali.</span>
       </div>
       <div class="alert alert--ok" id="formOk" role="status" hidden>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M5 8.3 7.2 10.5 11.2 5.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.7 2.7 5.3-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Berhasil masuk. Mengalihkan ke beranda akun…</span>
       </div>
 
       <form class="form" id="loginForm" novalidate>
         <div class="field" id="f-email">
           <label class="label" for="email">Email</label>
-          <input class="input" type="email" id="email" name="email" inputmode="email"
-                 autocomplete="email" placeholder="nama@email.com" aria-describedby="err-email" required>
+          <input class="input" type="email" id="email" name="email" inputmode="email" autocomplete="email" placeholder="nama@email.com" aria-describedby="err-email" required>
           <p class="msg msg--error" id="err-email" hidden>
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 11v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             <span>Masukkan alamat email yang valid.</span>
@@ -198,19 +157,10 @@
         <div class="field" id="f-password">
           <label class="label" for="password">Kata sandi</label>
           <div class="input-group">
-            <input class="input" type="password" id="password" name="password"
-                   autocomplete="current-password" placeholder="Masukkan kata sandi"
-                   aria-describedby="err-password" required>
-            <button class="input-action" type="button" id="pwToggle"
-                    aria-label="Tampilkan kata sandi" aria-pressed="false">
-              <svg id="eyeOn" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M1.7 10S4.8 4.6 10 4.6 18.3 10 18.3 10 15.2 15.4 10 15.4 1.7 10 1.7 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                <circle cx="10" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              <svg id="eyeOff" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" hidden>
-                <path d="M2.5 10s3.1-5.4 7.5-5.4c1.3 0 2.5.5 3.6 1.2M17.5 10s-3.1 5.4-7.5 5.4c-1.3 0-2.5-.5-3.6-1.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M3 3l14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
+            <input class="input" type="password" id="password" name="password" autocomplete="current-password" placeholder="Masukkan kata sandi" aria-describedby="err-password" required>
+            <button class="input-action" type="button" id="pwToggle" aria-label="Tampilkan kata sandi" aria-pressed="false">
+              <svg id="eyeOn" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-6.4 10-6.4S22 12 22 12s-3.6 6.4-10 6.4S2 12 2 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.8" stroke="currentColor" stroke-width="1.8"/></svg>
+              <svg id="eyeOff" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden><path d="M3 12s3.6-6.4 9-6.4c1.5 0 2.9.6 4.1 1.4M21 12s-3.6 6.4-9 6.4c-1.5 0-2.9-.6-4.1-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             </button>
           </div>
           <p class="msg msg--error" id="err-password" hidden>
@@ -227,15 +177,13 @@
           <a class="form__link" href="#">Lupa kata sandi?</a>
         </div>
 
-        <button class="btn btn--primary btn--lg btn--block" type="submit" id="submitBtn">
-          Masuk
-        </button>
+        <button class="btn btn--block" type="submit" id="submitBtn">Masuk</button>
 
         <p class="hint" style="text-align:center">
           Dengan masuk, kamu menyetujui
-          <a href="#" style="color:var(--ink-600);text-decoration:underline;text-underline-offset:2px">Syarat &amp; Ketentuan</a>
+          <a href="#" style="color:var(--body);text-decoration:underline;text-underline-offset:2px">Syarat &amp; Ketentuan</a>
           dan
-          <a href="#" style="color:var(--ink-600);text-decoration:underline;text-underline-offset:2px">Kebijakan Privasi</a>.
+          <a href="#" style="color:var(--body);text-decoration:underline;text-underline-offset:2px">Kebijakan Privasi</a>.
         </p>
       </form>
 
@@ -260,42 +208,36 @@
     </div>
   </div>
 
-  <!-- ================= VISUAL COLUMN ================= -->
+  <!-- ================= VISUAL ================= -->
   <aside class="auth__visual" aria-hidden="true">
-    <div class="visual__top"><i></i> Analisis hasil tryout</div>
+    <div class="vis__top"><i></i> Analisis hasil tryout</div>
 
-    <div class="visual__mid">
+    <div class="vis__mid">
       <h2>Satu tryout tidak berarti apa-apa. Cara membacanya yang menentukan.</h2>
       <p>Setiap kali kamu masuk, kamu melanjutkan percakapan dengan datamu sendiri: materi mana yang membaik, dan mana yang masih menahan.</p>
 
       <div class="vcard">
         <div class="vcard__head">
           <span class="vcard__id">Progres · 4 simulasi</span>
-          <span class="badge badge--invert">+38</span>
+          <span class="badge badge--gold">+38</span>
         </div>
-        <div class="vrow">
-          <span>TWK</span><span class="vbar"><i class="b" style="width:63%"></i></span><span>95</span>
-        </div>
-        <div class="vrow">
-          <span>TIU</span><span class="vbar"><i class="a" style="width:64%"></i></span><span>112</span>
-        </div>
-        <div class="vrow">
-          <span>TKP</span><span class="vbar"><i style="width:91%"></i></span><span>205</span>
-        </div>
+        <div class="vrow"><span>TWK</span><span class="vbar"><i class="b2" style="width:63%"></i></span><span>95</span></div>
+        <div class="vrow"><span>TIU</span><span class="vbar"><i style="width:64%"></i></span><span>112</span></div>
+        <div class="vrow"><span>TKP</span><span class="vbar"><i class="b3" style="width:91%"></i></span><span>205</span></div>
       </div>
     </div>
 
-    <div class="visual__bottom">
+    <div class="vis__bottom">
       <div class="vpoint">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5 6 12l7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Peta materi dan pola kesalahan tersimpan per simulasi</span>
       </div>
       <div class="vpoint">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5 6 12l7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Jejak waktu per soal untuk memperbaiki tempo</span>
       </div>
       <div class="vpoint">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5 6 12l7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Rencana latihan yang diperbarui setiap tryout</span>
       </div>
     </div>
@@ -319,7 +261,6 @@
   var okBox = document.getElementById("formOk");
   var submitBtn = document.getElementById("submitBtn");
 
-  /* ---- password reveal ---- */
   var toggle = document.getElementById("pwToggle");
   var eyeOn = document.getElementById("eyeOn");
   var eyeOff = document.getElementById("eyeOff");
@@ -333,27 +274,22 @@
     password.focus();
   });
 
-  /* ---- validation ---- */
   function setError(field, errEl, on, message) {
     field.classList.toggle("field--error", on);
     errEl.hidden = !on;
-    var input = field.querySelector(".input");
-    input.setAttribute("aria-invalid", String(on));
+    field.querySelector(".input").setAttribute("aria-invalid", String(on));
     if (message) errEl.querySelector("span").textContent = message;
   }
-
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
 
   function validate(show) {
     var ok = true;
-    var emailOk = validEmail(email.value.trim());
-    if (!emailOk) {
+    if (!validEmail(email.value.trim())) {
       ok = false;
       if (show) setError(fEmail, eEmail, true, email.value.trim() === "" ? "Email belum diisi." : "Format email belum benar. Contoh: nama@email.com");
     } else setError(fEmail, eEmail, false);
 
-    var passOk = password.value.length >= 8;
-    if (!passOk) {
+    if (password.value.length < 8) {
       ok = false;
       if (show) setError(fPass, ePass, true, password.value === "" ? "Kata sandi belum diisi." : "Kata sandi minimal 8 karakter.");
     } else setError(fPass, ePass, false);
@@ -365,7 +301,6 @@
   email.addEventListener("input", function () { if (fEmail.classList.contains("field--error")) validate(true); });
   password.addEventListener("input", function () { if (fPass.classList.contains("field--error")) validate(true); });
 
-  /* ---- submit ---- */
   var timer = null;
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -379,19 +314,15 @@
     submitBtn.classList.add("is-loading");
     submitBtn.disabled = true;
     submitBtn.setAttribute("aria-busy", "true");
-
     clearTimeout(timer);
     timer = setTimeout(function () {
       submitBtn.classList.remove("is-loading");
       submitBtn.disabled = false;
       submitBtn.removeAttribute("aria-busy");
-      /* prototype only: any valid input succeeds */
       okBox.hidden = false;
-      okBox.focus && okBox.focus();
     }, 1400);
   });
 
-  /* ---- prototype state switcher ---- */
   document.querySelectorAll(".devstates__body button").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var s = btn.getAttribute("data-state");

@@ -1,160 +1,124 @@
 /* ============================================================================
-   LMS-CAT · DESIGN TOKENS  v1.0
-   Direction: "Signal & Structure" — exam-paper editorial + data instrument.
-   Paper surface, ink type, ultramarine action, highlighter accent.
-   All values are the single source of truth. Do not hardcode colors in pages.
+   LMS-CAT · DESIGN TOKENS  v2.0  —  "Navy & Gold"
+   Biru dongker sebagai dasar kepercayaan, emas sebagai aksen tunggal.
+   Satu keluarga huruf (Plus Jakarta Sans), sudut besar, tombol pil.
+   Semua nilai warna/ukuran WAJIB lewat token ini.
    ========================================================================== */
 
 :root {
   /* ---------------------------------------------------------------------
-     1. PRIMITIVES — Paper (warm neutral, the base surface of the product)
+     1. NAVY — permukaan gelap, header, seksi penekanan
      --------------------------------------------------------------------- */
-  --paper-000: #FFFDF8;
-  --paper-050: #FAF8F1;
-  --paper-100: #F5F2E9;
-  --paper-200: #EDE9DC;
-  --paper-300: #E1DCCA;
-  --paper-400: #CFC9B4;
+  --navy-950: #04121F;
+  --navy-900: #061A2F;
+  --navy-800: #0A2540;
+  --navy-700: #123B60;
+  --navy-600: #1B4E78;
 
   /* ---------------------------------------------------------------------
-     2. PRIMITIVES — Ink (cool neutral, text + inverted surfaces)
+     2. GOLD — satu-satunya aksen. Dipakai hemat.
      --------------------------------------------------------------------- */
-  --ink-900: #12141C;
-  --ink-800: #191C27;
-  --ink-700: #232734;
-  --ink-600: #343949;
-  --ink-500: #4C5265;
-  --ink-400: #666C7F;
-  --ink-300: #8C92A5;
-  --ink-200: #B6BBC8;
-  --ink-100: #DDE0E8;
+  --gold-600: #C99100;
+  --gold-500: #F5B700;
+  --gold-400: #FFD34D;
+  --gold-200: #FFE9A8;
+  --gold-100: #FEF4DE;
 
   /* ---------------------------------------------------------------------
-     3. PRIMITIVES — Brand (ultramarine = action / trust / exam pen)
+     3. NETRAL — sedikit kebiruan, senada dengan navy
      --------------------------------------------------------------------- */
-  --blue-700: #1E27B8;
-  --blue-600: #2F3BE8;
-  --blue-500: #4A55F0;
-  --blue-300: #8F97F6;
-  --blue-200: #C9CDFB;
-  --blue-100: #E7E9FD;
-  --blue-050: #F1F2FE;
+  --ink: #0D1B2A;
+  --body: #48596B;
+  --muted: #7A8B9C;
+  --line: #E4EAF1;
+  --line-strong: #CFD9E4;
+  --cream: #F6F8FB;
+  --white: #FFFFFF;
 
   /* ---------------------------------------------------------------------
-     4. PRIMITIVES — Accent (highlighter = progress / attention / study)
+     4. SEMANTIK
      --------------------------------------------------------------------- */
-  --lime-600: #B8D62A;
-  --lime-500: #D9F24B;
-  --lime-400: #E6F87C;
-  --lime-200: #F0FAB9;
-  --lime-100: #F7FDDF;
+  --green-600: #0B7A44;
+  --green-500: #0F9D58;
+  --green-100: #E4F6EC;
+
+  --amber-600: #8A6100;
+  --amber-500: #C99100;
+  --amber-100: #FEF4DE;
+
+  --red-600: #B33737;
+  --red-500: #D64545;
+  --red-100: #FBE7E7;
+
+  --blue-600: #16588C;
+  --blue-500: #1B6FB5;
+  --blue-100: #E8F1FA;
 
   /* ---------------------------------------------------------------------
-     5. PRIMITIVES — Data & semantic
+     5. PERAN SEMANTIK
      --------------------------------------------------------------------- */
-  --green-600: #0C7A55;
-  --green-500: #0F8A5F;
-  --green-100: #DFF3EA;
+  --bg: var(--white);
+  --bg-alt: var(--cream);
+  --surface: var(--white);
+  --surface-dark: var(--navy-900);
 
-  --amber-600: #A86200;
-  --amber-500: #D98200;
-  --amber-100: #FCEFD3;
+  --text: var(--ink);
+  --text-2: var(--body);
+  --text-3: var(--muted);
+  --text-invert: #E8F1FA;
+  --text-invert-2: #A9C0D4;
+  --text-invert-3: #8FA6BC;
 
-  --rose-600: #C22D1F;
-  --rose-500: #D93A2B;
-  --rose-100: #FBE4E0;
+  --line-soft: #EEF2F7;
+  --line-invert: rgba(255, 255, 255, 0.12);
+  --line-invert-2: rgba(255, 255, 255, 0.2);
 
-  --violet-500: #7B3FE4;
-  --violet-100: #F0E8FD;
-  --teal-500: #0E8C8C;
-  --teal-100: #DCF2F2;
+  --brand: var(--gold-500);
+  --brand-hover: var(--gold-400);
+  --brand-fg: #231A00;
+  --brand-tint: var(--gold-100);
+  --navy: var(--navy-900);
+
+  --focus: #1B6FB5;
+  --focus-invert: var(--gold-400);
+
+  /* data-viz */
+  --dv-1: #F5B700;
+  --dv-2: #7FB4E8;
+  --dv-3: #0F9D58;
+  --dv-4: #D64545;
+  --dv-5: #8B6BD9;
+  --dv-track: #E4EAF1;
 
   /* ---------------------------------------------------------------------
-     6. SEMANTIC SURFACES & TEXT  (use these in components, never primitives)
+     6. TIPOGRAFI — satu keluarga, banyak bobot
      --------------------------------------------------------------------- */
-  --bg: var(--paper-050);
-  --bg-alt: var(--paper-100);
-  --surface: var(--paper-000);
-  --surface-sunken: var(--paper-200);
-  --surface-invert: var(--ink-900);
-  --surface-invert-2: var(--ink-800);
+  --font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  --text: var(--ink-900);
-  --text-secondary: var(--ink-500);
-  --text-muted: var(--ink-400);
-  --text-invert: var(--paper-050);
-  --text-invert-2: #ADB3C2;
-  --text-invert-3: #7E859A;
-
-  --line: var(--paper-300);
-  --line-soft: var(--paper-200);
-  --line-strong: var(--paper-400);
-  --line-invert: #2C3142;
-  --line-invert-2: #3B4155;
-
-  --brand: var(--blue-600);
-  --brand-hover: var(--blue-700);
-  --brand-tint: var(--blue-050);
-  --brand-tint-2: var(--blue-100);
-
-  --accent: var(--lime-500);
-  --accent-ink: var(--ink-900);
-
-  --ok: var(--green-500);
-  --ok-tint: var(--green-100);
-  --warn: var(--amber-500);
-  --warn-tint: var(--amber-100);
-  --danger: var(--rose-500);
-  --danger-tint: var(--rose-100);
-  --info: var(--blue-600);
-  --info-tint: var(--blue-050);
-
-  /* Data-viz ramp (categorical, colour-blind aware ordering) */
-  --dv-1: #2F3BE8;
-  --dv-2: #0E8C8C;
-  --dv-3: #7B3FE4;
-  --dv-4: #D98200;
-  --dv-5: #0F8A5F;
-  --dv-track: #E4DFCF;
-
-  /* ---------------------------------------------------------------------
-     7. TYPOGRAPHY
-     --------------------------------------------------------------------- */
-  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, monospace;
-
-  /* Fixed scale — product UI (login, register, exam) */
   --text-2xs: 0.6875rem;  /* 11 */
   --text-xs: 0.75rem;     /* 12 */
-  --text-sm: 0.875rem;    /* 14 */
+  --text-sm: 0.84375rem;  /* 13.5 */
   --text-base: 1rem;      /* 16 */
-  --text-md: 1.125rem;    /* 18 */
-  --text-lg: 1.375rem;    /* 22 */
-  --text-xl: 1.75rem;     /* 28 */
-  --text-2xl: 2.25rem;    /* 36 */
-  --text-3xl: 2.875rem;   /* 46 */
+  --text-md: 1.0625rem;   /* 17 */
+  --text-lg: 1.25rem;     /* 20 */
+  --text-xl: 1.625rem;    /* 26 */
+  --text-2xl: 2.125rem;   /* 34 */
 
-  /* Fluid scale — marketing (landing) */
-  --text-display: clamp(2.25rem, 4.4vw, 3.75rem);
-  --text-h2: clamp(1.75rem, 3.1vw, 2.75rem);
-  --text-h3: clamp(1.25rem, 1.9vw, 1.625rem);
-  --text-lead: clamp(1.0625rem, 1.35vw, 1.25rem);
+  --text-display: clamp(1.7rem, 3.1vw, 2.65rem);   /* 27 → 42 */
+  --text-h2: clamp(1.55rem, 3.1vw, 2.5rem);          /* 25 → 40 */
+  --text-h3: clamp(1.05rem, 1.5vw, 1.25rem);         /* 17 → 20 */
+  --text-lead: clamp(0.98rem, 1.35vw, 1.08rem);      /* 16 → 17 */
 
-  --lh-tight: 0.98;
-  --lh-display: 1.02;
-  --lh-heading: 1.12;
-  --lh-snug: 1.35;
-  --lh-body: 1.62;
+  --lh-display: 1.16;
+  --lh-heading: 1.18;
+  --lh-body: 1.7;
 
-  --tr-tight: -0.035em;   /* display tracking */
-  --tr-snug: -0.02em;     /* headings */
-  --tr-normal: 0;
-  --tr-wide: 0.08em;      /* mono labels */
-  --tr-wider: 0.14em;
+  --tr-display: -0.03em;
+  --tr-heading: -0.02em;
+  --tr-label: 0.14em;
 
   /* ---------------------------------------------------------------------
-     8. SPACE — 4px base, vertical rhythm follows 24px body line box
+     7. SPASI & LAYOUT
      --------------------------------------------------------------------- */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
@@ -166,43 +130,30 @@
   --sp-8: 3rem;
   --sp-9: 4rem;
   --sp-10: 6rem;
-  --sp-11: 8rem;
 
-  --gutter: clamp(1.25rem, 4.2vw, 3rem);
-  --maxw: 1240px;
-  --maxw-narrow: 760px;
-  --section-y: clamp(4rem, 8.5vw, 7.5rem);
-  --header-h: 68px;
+  --wrap: 1120px;
+  --wrap-narrow: 820px;
+  --gutter: 20px;
+  --section-y: clamp(56px, 7vw, 92px);
 
   /* ---------------------------------------------------------------------
-     9. RADIUS / ELEVATION / MOTION
+     8. BENTUK, BAYANGAN, GERAK
      --------------------------------------------------------------------- */
-  --r-2: 2px;
-  --r-4: 4px;
-  --r-6: 6px;
-  --r-8: 8px;
-  --r-12: 12px;
-  --r-16: 16px;
-  --r-20: 20px;
-  --r-full: 999px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-pill: 999px;
 
-  --shadow-xs: 0 1px 2px rgba(18, 20, 28, 0.06);
-  --shadow-sm: 0 2px 8px -2px rgba(18, 20, 28, 0.10), 0 1px 2px rgba(18, 20, 28, 0.05);
-  --shadow-md: 0 16px 40px -18px rgba(18, 20, 28, 0.22), 0 2px 6px rgba(18, 20, 28, 0.05);
-  --shadow-lg: 0 40px 80px -32px rgba(18, 20, 28, 0.30), 0 4px 12px rgba(18, 20, 28, 0.06);
-  --shadow-hard: 5px 5px 0 0 var(--ink-900);
-  --shadow-hard-brand: 5px 5px 0 0 var(--blue-600);
+  --shadow-sm: 0 1px 2px rgba(9, 25, 43, 0.06), 0 4px 14px rgba(9, 25, 43, 0.06);
+  --shadow-md: 0 10px 30px rgba(9, 25, 43, 0.10);
+  --shadow-lg: 0 24px 60px rgba(4, 18, 31, 0.18);
+  --shadow-gold: 0 10px 24px rgba(245, 183, 0, 0.32);
+  --shadow-gold-hover: 0 16px 34px rgba(245, 183, 0, 0.40);
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
-  --dur-1: 120ms;
-  --dur-2: 220ms;
-  --dur-3: 380ms;
-  --dur-4: 640ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-1: 0.18s;
+  --dur-2: 0.3s;
 
-  --z-sticky: 100;
-  --z-drawer: 200;
+  --z-sticky: 90;
   --z-modal: 300;
-  --z-toast: 400;
 }

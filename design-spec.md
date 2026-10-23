@@ -1,11 +1,11 @@
-# LMS-CAT — Design Specification v1.0
+# LMS-CAT — Design Specification v2.0
 
 Dokumen serah-terima desain untuk AI agent programmer. Fokus: **antarmuka**, bukan backend.
-Empat halaman: Landing, Masuk, Daftar, Antarmuka Ujian CAT.
+Arah visual: **Navy & Gold** (lihat `design-system.md`).
 
-- Design system: [`design-system.md`](./design-system.md)
-- Alur pengguna: [`user-flow.md`](./user-flow.md)
-- Prototipe: `landing-page/index.html`, `login/index.html`, `register/index.html`, `exam-interface/index.html`
+- Prototipe: `landing-page/`, `login/`, `register/`, `exam-interface/`
+- Alur: `user-flow.md`
+- Arsip eksplorasi 4 arah: `directions/index.html`
 
 ---
 
@@ -16,409 +16,296 @@ LMS-CAT adalah platform tryout berbasis **Computer Assisted Test (CAT)** yang me
 
 | Tujuan bisnis | Terjemahan ke desain |
 |---|---|
-| Konversi pengunjung → akun | CTA “Daftar” selalu terlihat, hero menyatakan masalah nyata, hambatan daftar 4 kolom |
-| Diferensiasi vs tryout lain | Analisis materi + jejak waktu ditampilkan sebagai produk nyata (UI asli, bukan ilustrasi) |
-| Kesiapan monetisasi | Komponen paket sudah ada dengan placeholder harga yang jelas |
-| Ekspansi program | Struktur kartu program siap menampung sekolah kedinasan & seleksi lain |
-| Kepercayaan | Tanpa testimoni palsu, tanpa angka pengguna, tanpa janji kelulusan |
+| Konversi pengunjung → akun | CTA “Daftar” selalu terlihat; hero menyatakan masalah nyata; daftar 4 kolom |
+| Diferensiasi | Analisis materi + jejak waktu ditampilkan sebagai UI nyata, bukan ilustrasi |
+| Kesiapan monetisasi | Tiga tier dengan placeholder harga yang jelas |
+| Ekspansi program | Kartu program siap menampung kedinasan & seleksi lain |
+| Kepercayaan | Tanpa testimoni, tanpa jumlah pengguna, tanpa janji kelulusan |
 
-**Non-goals tahap ini:** dashboard penuh, halaman pembayaran, halaman hasil tryout lengkap, verifikasi email, login sosial.
+**Non-goals:** dashboard penuh, pembayaran, halaman hasil lengkap, verifikasi email, login sosial.
 
 ---
 
 ## 2. Target pengguna
 
-### Persona utama — “Rani, 22”
-- Lulusan D3/S1, sedang mempersiapkan SKD CPNS 2027, mengakses 80% dari smartphone.
-- Sudah ikut 3–5 tryout gratis. Skor stagnan di kisaran yang sama.
-- Frustrasi bukan karena kurang soal, tapi karena tidak tahu apa yang salah.
-- Kebutuhan: kejelasan langkah berikutnya, bukan konten tambahan.
-- Perilaku: scroll cepat, membaca judul & angka, meninggalkan halaman jika tidak paham dalam ~5 detik.
+**Rani, 22** — lulusan D3/S1, menyiapkan SKD CPNS 2027, 80% mengakses dari smartphone.
+Sudah ikut 3–5 tryout gratis, skor stagnan. Frustrasi bukan karena kurang soal, tapi tidak tahu apa yang salah.
 
-### Persona sekunder — “Dimas, 19”
-- Pelajar kelas 12, mempertimbangkan sekolah kedinasan.
-- Belum tahu struktur ujian. Butuh bahasa yang tidak teknis dan gambaran hasil.
-- Saat ini hanya melihat halaman program (belum ada modul) — desain harus jujur soal status “disiapkan”.
+**Dimas, 19** — pelajar kelas 12, mempertimbangkan sekolah kedinasan. Belum tahu struktur ujian,
+butuh bahasa yang tidak teknis. Saat ini hanya melihat halaman program (belum ada modul).
 
-### Konteks pemakaian
-- Malam hari, kuota terbatas, sering sambil melakukan hal lain.
-- Saat ujian: fokus tunggal, cemas soal waktu, sering memakai satu tangan.
-
-Implikasi desain: mobile-first, ukuran teks besar, kontras tinggi, tanpa animasi yang memperlambat, informasi penting tidak boleh bergantung pada hover.
+Konteks: malam hari, kuota terbatas, sering sambil melakukan hal lain. Saat ujian: fokus tunggal,
+cemas soal waktu, sering satu tangan.
 
 ---
 
 ## 3. Positioning & pesan
 
-**Positioning:** LMS-CAT bukan tempat mengerjakan tryout, tapi tempat memahami kelemahan, memperbaiki strategi, dan meningkatkan kesiapan.
+**Positioning:** LMS-CAT bukan tempat mengerjakan tryout, tapi tempat memahami kelemahan,
+memperbaiki strategi, dan meningkatkan kesiapan.
 
-**Pesan utama (hierarki):**
+**Hierarki pesan:**
 
 1. **Hook** — “Nilai tryout mandek. Bukan karena kurang soal.”
-2. **Janji** — LMS-CAT membedah jawaban *dan* waktu pengerjaan, lalu menyusun prioritas belajar.
-3. **Bukti** — peta materi, jejak waktu, rencana latihan (ditampilkan sebagai UI).
+2. **Janji** — membedah jawaban *dan* waktu, lalu menyusun prioritas.
+3. **Bukti** — peta materi, jejak waktu, rencana latihan (sebagai UI).
 4. **Aksi** — Mulai Tryout Gratis.
 
-**Nada bicara:** langsung, tenang, tanpa hiperbola. Kalimat pendek. Tidak memakai kata “revolusioner”, “terbaik”, “dijamin”.
+**Nada:** langsung, tenang, tanpa hiperbola. Kata yang dipakai: bocor, prioritas, jejak waktu,
+kesiapan. Kata yang dihindari: jaminan lulus, ranking nasional, prediksi kelulusan, “pasti”.
 
-**Kata yang dipakai:** bocor, prioritas, jejak waktu, peta materi, kesiapan.
-**Kata yang dihindari:** jaminan lulus, ranking nasional, prediksi kelulusan, “pasti”.
+**Batasan klaim (wajib):**
 
-**Batasan klaim (wajib dipatuhi implementasi):**
-
-- Tidak ada testimoni, jumlah pengguna, atau tingkat kelulusan.
-- Semua angka pada contoh analisis diberi label “Data ilustratif”.
+- Tidak ada testimoni, jumlah alumni, tingkat kelulusan, atau garansi.
+- Semua angka contoh diberi label “Data ilustratif”.
 - Passing grade dan jadwal seleksi tidak dicantumkan.
-- Harga memakai placeholder `Rp [—]` dengan catatan eksplisit.
+- Harga memakai `Rp [—]` dengan catatan placeholder.
 
 ---
 
 ## 4. Landing page
 
-File: `landing-page/index.html`
+File: `landing-page/index.html` — 13 seksi, ritme terang/gelap berselang.
 
-### 4.1 Urutan seksi & peran
-
-| # | Seksi | Peran | Anchor |
+| # | Seksi | Latar | Peran |
 |---|---|---|---|
-| 1 | Navbar | Orientasi + akses masuk/daftar | — |
-| 2 | Hero | Menyatakan masalah + janji + bukti visual | `#beranda` |
-| 3 | Ticker | Jeda ritmis, menanam istilah kunci | — |
-| 4 | Masalah (gelap) | Empati: 5 keluhan nyata → solusi | `#masalah` |
-| 5 | Keunggulan | 3 pembeda dengan UI konkret | `#fitur` |
-| 6 | Cara kerja | 6 langkah siklus | `#cara-kerja` |
-| 7 | Preview analisis (gelap) | Bukti produk: 3 tab analisis | `#analisis` |
-| 8 | Program | Konteks CPNS 2027 + roadmap | `#program` |
-| 9 | Paket | Struktur monetisasi | `#paket` |
-| 10 | FAQ | Menghapus keraguan terakhir | `#faq` |
-| 11 | CTA band | Konversi terakhir | — |
-| 12 | Footer | Legal, navigasi, identitas | — |
+| 1 | Topbar | navy-950 | Pengumuman singkat + titik emas berdenyut |
+| 2 | Header | navy-900 | Logo, 5 tautan, Masuk (ghost), Daftar (emas) |
+| 3 | Hero | navy + glow | Masalah, janji, CTA, kartu hasil |
+| 4 | Masalah | cream | 3 kartu keluhan + kutipan |
+| 5 | Solusi | putih | Konsep + mock laporan analisis |
+| 6 | Fitur | navy | 3 kartu keunggulan |
+| 7 | Contoh analisis | cream | Tab materi / waktu / strategi |
+| 8 | Untuk siapa | putih | Cocok vs belum cocok |
+| 9 | Cara kerja | cream | 6 langkah |
+| 10 | Program | putih | SKD aktif + 2 disiapkan |
+| 11 | Paket | cream | 3 tier + notice placeholder |
+| 12 | FAQ | putih | 6 accordion |
+| 13 | CTA penutup | navy | Ajakan terakhir |
+| — | Footer | navy-950 | Navigasi, legal, disclaimer |
 
-Ritme terang–gelap: paper → gelap → paper → paper-100 → gelap → paper → paper-100 → lime → gelap.
-Tujuannya memecah scroll panjang dan memberi penekanan pada dua seksi bukti.
+### 4.1 Header
 
-### 4.2 Navbar
+- Sticky 68px, navy-900, border bawah 1px putih 8%. Saat scroll: shadow.
+- Tautan 14px/600 warna `#A9C0D4`, hover putih + latar 7%.
+- “Daftar” = pil emas `.btn--sm`; “Masuk” = ghost dengan border 24% putih.
+- ≤960px: tautan & aksi disembunyikan, burger 44px, menu turun dengan dua tombol di bawah.
 
-- Tinggi 68px, sticky, latar `#FAF8F1`, tanpa blur.
-- Kiri: logo. Tengah-kiri: Beranda, Fitur, Cara Kerja, Paket Tryout. Kanan: “Masuk” (ghost) + “Daftar” (primary, 38px).
-- Tautan aktif ditandai garis lime 2px di bawah, diperbarui saat scroll (`IntersectionObserver` atau perhitungan `offsetTop`).
-- Saat scroll > 8px: muncul border bawah + shadow halus.
-- < 940px: tautan & aksi disembunyikan, muncul tombol burger 44×44. Menu buka-tutup full width di bawah navbar, tautan 56px, dua tombol di bawah.
-- Menu mobile menutup otomatis saat tautan diklik.
+### 4.2 Hero
 
-### 4.3 Hero
+**Hierarki:** eyebrow pil emas → H1 2 baris → subjudul → CTA → baris trust.
 
-**Hierarki:** eyebrow → H1 (3 baris) → subjudul → CTA → meta.
+- H1: “Nilai tryout mandek.” / “Bukan karena **kurang soal**.” — frasa terakhir emas + garis bawah emas.
+  Patah baris disengaja dengan `<br>`; ukuran `clamp(27px, 3.1vw, 42px)` supaya tetap 2 baris.
+- CTA: “Mulai Tryout Gratis →” (emas) + “Lihat contoh analisis” (ghost) → anchor `#analisis`.
+- Trust: 3 item dengan centang emas (kapabilitas produk, bukan klaim sosial).
+- Latar: gradien navy + radial emas kanan atas + grid 58px dengan mask radial.
 
-- Eyebrow: `SIMULASI CAT · SKD CPNS 2027` (mono 11px uppercase, kotak lime 7px).
-- H1: “Nilai tryout mandek.” / “Bukan karena” / “kurang soal.” — baris ketiga memakai `.mark` (highlighter lime).
-  - Patah baris **disengaja** dengan `<br>`; jangan dibiarkan wrap otomatis karena highlight akan terpecah.
-- Subjudul: 1 kalimat nilai + 1 kalimat penegasan. Maks 44ch.
-- CTA primer “Mulai Tryout Gratis” (56px, dengan panah) → `register/index.html`.
-- CTA sekunder “Lihat contoh analisis” (outline) → `#analisis`.
-- Meta: tiga label mono (TWK·TIU·TKP / Analisis per soal / Riwayat progres) dengan titik lime.
+**Kartu hasil (kanan):** kartu gelap semi-transparan dengan blur.
 
-**Visual produk (kolom kanan):** kartu hasil tryout asli dalam HTML, bukan gambar.
-
-| Elemen | Isi | Catatan |
-|---|---|---|
-| Header kartu | `SIMULASI #4 · SKD` + badge “Data ilustratif” | Badge wajib, jangan dihapus |
-| Skor | Ring 104px, 412, label “SKOR TOTAL” | `stroke-dashoffset` = 79 untuk 75% |
-| Delta | `+38 poin` (chip hijau) | Arah naik memakai hijau + ikon panah, bukan warna saja |
-| Bar kategori | TWK 95/150, TIU 112/175, TKP 205/225 | Jumlah = 412 (konsisten) |
-| Materi bocor | 3 chip rose dengan persentase | — |
-| Kartu mengambang 1 | “Rekomendasi berikutnya · Deret angka · Prioritas 1” | Di atas kartu, `top:-60px` |
-| Kartu mengambang 2 | “Jejak waktu · Soal 27 · 3m 12s” + sparkline | Di bawah kartu, `bottom:-40px` |
-
-Perilaku responsif: < 1080px kartu rekomendasi disembunyikan; < 960px layout 1 kolom, visual maks 520px; < 560px kartu waktu disembunyikan, CTA full width.
-
-Latar: grid 64px dengan mask radial + glow lime lembut di kanan atas. Opasitas rendah agar teks tetap dominan.
-
-### 4.4 Seksi masalah (gelap)
-
-- Judul dua baris + lead di kanan (grid split).
-- 5 baris bernomor `01–05`, masing-masing: nomor mono lime → pertanyaan (display 20–23px) → jawaban dengan label kecil “LMS-CAT”.
-- Baris dipisah garis `#2C3142`; hover memberi latar 2.5% putih (isyarat bahwa ini daftar, bukan paragraf).
-- < 820px: nomor 36px, jawaban pindah ke bawah pertanyaan.
-
-### 4.5 Seksi keunggulan
-
-Tiga blok bergantian kiri-kanan (`--rev` membalik urutan visual di desktop).
-
-Setiap blok: badge kategori → judul → 1 paragraf → 3 poin ceklis → panel UI.
-
-| Blok | Panel yang ditampilkan |
+| Elemen | Isi |
 |---|---|
-| Peta materi | Daftar kategori TWK dengan bar penguasaan + tag (`PERLU LATIHAN`, `PRIORITAS`) + kesimpulan otomatis |
-| Jejak waktu | 30 batang durasi (2 batang disorot amber/merah), 3 stat (rata-rata, terlama, efisiensi), temuan |
-| Rencana latihan | 3 item prioritas bernomor; item pertama memakai shadow keras + tombol MULAI |
+| Header | `SIMULASI #4 · SKD` + badge “Data ilustratif” |
+| Skor | Ring 92px emas, 412, label “SKOR” |
+| Delta | `+38 poin` (chip hijau) |
+| 4 kotak | TWK 95 · TIU 112 · TKP 205 · MENIT 94 — meniru ritme kotak timer referensi |
+| Chip | Deret angka 41% · Silogisme 48% |
 
-Aturan: setiap panel harus menampilkan **data**, bukan ikon. Jika data belum tersedia di backend, pakai state kosong yang jujur, bukan angka palsu tanpa label.
+≤960px: satu kolom, kartu di bawah teks, lebar maksimum 520px.
 
-### 4.6 Cara kerja
+### 4.3 Masalah
 
-6 langkah dalam satu baris bergaris atas, masing-masing punya titik biru di garis, nomor mono, judul, satu kalimat.
-Responsif: 6 → 3 (≤1000px) → 2 kolom (≤640px).
+Kicker pil + H2 2 baris + lead. Tiga kartu putih (ikon emas 44px, judul 17px, isi 14.5px).
+Di bawahnya kutipan dengan border kiri emas 4px + penjelasan kecil.
 
-### 4.7 Preview analisis (gelap)
+### 4.4 Solusi
 
-- Tab: Analisis materi / Manajemen waktu / Strategi kelulusan. Tab aktif lime.
-- Panel kiri: kartu data. Panel kanan: 2–3 kartu insight dengan label mono lime.
-- Tab 1: 5 bar kategori + heatmap 20×6 (sel 12px) + legenda lemah→kuat.
-- Tab 2: waktu per bagian + 30 batang durasi + 3 stat + strategi pembagian waktu.
-- Tab 3: rencana 4 minggu (3 item) + dasar rekomendasi + batasan (“tidak ada prediksi kelulusan”).
-- Semua tab wajib tetap ada di DOM dengan `hidden` agar mudah diimplementasikan sebagai tab server-side.
+Dua kolom: kiri teks + 3 pilar bernomor (kotak navy 36px, angka emas); kanan mock laporan
+gelap dengan 3 bar (emas / biru / hijau) dan footer “Prioritas berikutnya”.
 
-### 4.8 Program
+### 4.5 Fitur (navy)
 
-3 kartu: SKD CPNS 2027 (aktif, shadow keras, badge lime), Sekolah Kedinasan (Disiapkan), Seleksi lainnya (Disiapkan).
-Tanpa tanggal, tanpa passing grade. Kartu aktif memakai border ink + shadow keras; kartu lain datar.
+Tiga kartu kaca `rgba(255,255,255,.045)`, ikon dalam kotak emas 46px, judul putih, isi `#AFC4D6`.
+Hover: naik 3px + border emas 45%.
 
-### 4.9 Paket
+### 4.6 Contoh analisis
 
-- Notice kuning: penjelasan placeholder (jangan dihapus sebelum harga final).
-- 3 tier: Latihan / Intensif (gelap, badge “Paling dipilih”) / Prioritas.
-- Setiap tier: nama, deskripsi, harga `Rp [—]` + `/paket`, catatan “Harga placeholder”, 4 baris fitur (ceklis atau silang), CTA.
-- Tier tengah memakai `.btn--lime`; lainnya outline.
-- Harga final: ganti `Rp [—]`, `[—] simulasi`, dan `[—] fitur tambahan`.
+Tab pil (aktif navy). Panel kiri putih dengan bar penguasaan + heatmap 20×6; panel kanan 3 kartu
+insight dengan label emas. Tiga panel: materi, waktu, strategi — semua ada di DOM, `hidden` untuk
+yang tidak aktif.
 
-### 4.10 FAQ
+### 4.7 Untuk siapa
 
-6 item, accordion native, lebar maks 820px, satu kolom.
-Pertanyaan sesuai brief; jawaban 2–3 kalimat, tanpa klaim.
+Dua kartu: hijau (cocok, 4 poin) dan netral (belum cocok, 3 poin). Tujuannya menurunkan salah target,
+bukan menakut-nakuti.
 
-### 4.11 CTA band & footer
+### 4.8 Cara kerja
 
-- Band lime penuh, judul 2 baris, satu paragraf, dua tombol vertikal (primary + outline), dekorasi bulatan jawaban 22% opasitas.
-- Footer gelap 4 kolom: identitas + tagline, Navigasi, Bantuan, Legal. Baris bawah: hak cipta + disclaimer data ilustratif.
+6 kartu bernomor dalam grid 3 kolom (2 baris). Nomor kotak navy + angka emas.
 
-### 4.12 Elemen konversi
+### 4.9 Program
+
+3 kartu. SKD CPNS 2027 = aktif (border emas + glow), dua lainnya outline “Disiapkan”.
+
+### 4.10 Paket
+
+- Notice emas: penjelasan placeholder — jangan dihapus.
+- 3 tier: Latihan (putih) / Intensif (navy, badge “Paling dipilih”) / Prioritas (putih).
+- Harga `Rp [—]` + “Harga placeholder”. CTA: outline / emas / outline.
+
+### 4.11 FAQ & CTA penutup
+
+FAQ: 6 accordion, lebar maks 820px, ikon +/− yang berubah emas saat terbuka.
+CTA penutup: navy + glow, H2 maks 20em, satu tombol emas 56px, micro-copy 13px.
+
+### 4.12 Konversi
 
 | Elemen | Alasan |
 |---|---|
-| “Daftar” di navbar (selalu terlihat) | Akses konstan tanpa scroll |
-| CTA ganda di hero (primary + proof) | Menangkap pengunjung yang belum siap daftar |
-| Sticky CTA bawah di mobile (muncul setelah 620px) | Menjaga jalur konversi saat scroll panjang |
-| “Lihat contoh analisis” | Menurunkan risiko dengan menunjukkan produk dulu |
-| CTA band sebelum footer | Titik keputusan terakhir |
+| Topbar pengumuman | Menandai produk hidup tanpa klaim palsu |
+| Daftar di header | Akses konstan |
+| CTA ganda di hero | Menangkap yang belum siap daftar |
+| Floating CTA mobile (setelah 560px) | Menjaga jalur konversi saat scroll panjang |
+| “Lihat contoh analisis” | Menurunkan risiko dengan bukti |
 
 ---
 
 ## 5. Halaman masuk
 
-File: `login/index.html`
+- Desktop ≥980px: dua kolom — form (maks 410px, tengah vertikal) + panel navy.
+- Mobile: panel visual **disembunyikan**, form langsung.
+- Form: email, kata sandi (tombol tampil 42px), “Ingat saya”, “Lupa kata sandi?”, tombol emas block,
+  catatan legal, tautan daftar, footer kecil.
+- Panel kanan: label mono, pernyataan 2 baris, paragraf, kartu progres (3 bar), 3 poin nilai. `aria-hidden`.
 
-### 5.1 Layout
-
-- Desktop ≥ 980px: dua kolom — form (1fr, maks 408px, rata tengah vertikal) + panel visual gelap (1.02fr).
-- Mobile: hanya form. Panel visual **disembunyikan** (bukan ditumpuk) agar pengguna langsung bisa mengetik.
-- Panel visual berisi: label mono, pernyataan 2 baris, paragraf, kartu progres mini, 3 poin nilai. Semua `aria-hidden` karena dekoratif.
-
-### 5.2 Struktur form
-
-1. Logo + tautan “Beranda”.
-2. Eyebrow “Akun peserta”, H1 “Masuk untuk melanjutkan.”, subjudul 1 baris.
-3. Alert global (tersembunyi default).
-4. Email — `type=email`, `autocomplete=email`, `inputmode=email`.
-5. Kata sandi — dengan tombol tampil/sembunyi 40×40, `aria-pressed`.
-6. Baris: checkbox “Ingat saya” + tautan “Lupa kata sandi?”.
-7. Tombol “Masuk” (primary, 56px, block).
-8. Catatan persetujuan (12px) dengan tautan legal.
-9. “Belum punya akun? Daftar gratis”.
-10. Footer kecil (hak cipta, bantuan, privasi).
-
-### 5.3 Perilaku & state
-
-| State | Perilaku |
-|---|---|
-| Default | Tanpa pesan error. Placeholder saja. |
-| Validasi blur | Email kosong/format salah → pesan di bawah field, `aria-invalid`, fokus tidak dipindah |
-| Submit invalid | Validasi semua field, fokus ke field salah pertama |
-| Kredensial salah | Alert di atas form: “Email atau kata sandi tidak cocok. Periksa kembali.” — jangan mengungkap field mana yang salah |
-| Loading | Tombol `.is-loading` + `aria-busy`, input tetap bisa dibaca tapi tombol disabled |
-| Sukses | Alert hijau + redirect (prototipe: pesan “Mengalihkan…”) |
-
-Pesan error spesifik: “Email belum diisi.” / “Format email belum benar. Contoh: nama@email.com” / “Kata sandi belum diisi.” / “Kata sandi minimal 8 karakter.”
-
-Catatan implementasi: **jangan** menambahkan login Google/OTP sebelum fitur tersedia di backend.
+State: default · validasi blur · kredensial salah (alert generik di atas form) · loading (`.is-loading`) ·
+sukses (alert hijau). Panel “Pratinjau state prototipe” hanya untuk demo — hapus saat produksi.
 
 ---
 
 ## 6. Halaman daftar
 
-File: `register/index.html`
-
-### 6.1 Prinsip
-
-Empat field saja. Tidak ada kuesioner, tidak ada nomor telepon, tidak ada asal instansi. Setiap field tambahan harus punya alasan kuat.
-
-### 6.2 Struktur
-
-1. Nama lengkap (placeholder: “Sesuai nama di kartu ujian”).
-2. Email.
-3. Kata sandi + indikator kekuatan 4 segmen.
-4. Konfirmasi kata sandi + penanda “Kata sandi cocok”.
-5. Checkbox persetujuan Syarat & Kebijakan (tautan inline).
-6. Tombol “Buat akun”.
-7. “Sudah punya akun? Masuk”.
-
-Panel kanan: “Yang kamu dapat begitu akun aktif” + 4 manfaat bernomor (simulasi CAT, analisis materi, jejak waktu, riwayat progres).
-
-### 6.3 Indikator kekuatan
-
-| Skor | Label | Warna |
-|---|---|---|
-| 0 | — | track kosong |
-| 1 | Lemah | `#D93A2B` |
-| 2 | Sedang | `#D98200` |
-| 3 | Kuat | `#7FBF3F` |
-| 4 | Sangat kuat | `#0F8A5F` |
-
-Perhitungan: +1 jika ≥8 karakter, +1 jika ≥12, +1 jika ada angka **dan** huruf, +1 jika ada simbol. Jika 1–7 karakter → paksa skor 1.
-Indikator bersifat bantuan, **bukan** penghalang: validasi hanya mensyaratkan ≥8 karakter.
-Nilai kekuatan diumumkan lewat `aria-live="polite"` (teks tersembunyi).
-
-### 6.4 State
-
-Sama seperti login, ditambah:
-- Konfirmasi tidak cocok → error saat blur/submit; saat cocok tampilkan penanda hijau dan sembunyikan error.
-- Checkbox persetujuan belum dicentang → error di bawah checkbox, bukan alert global.
-- Sukses → form diganti panel sukses (bukan modal): ikon centang lime, “Selamat, akunmu siap.”, 3 langkah berikutnya, CTA “Mulai simulasi pertama”, catatan bahwa tombol mengarah ke pemilihan paket/daftar simulasi.
-
-Jangan mengasumsikan verifikasi email ada. Jika nanti ditambahkan, tambahkan state “Cek email” sebagai layar terpisah.
+Empat field: nama, email, kata sandi, konfirmasi + checkbox persetujuan.
+Indikator kekuatan 4 segmen (merah → emas → hijau limau → hijau), hanya bantuan; validasi tetap ≥8 karakter.
+Sukses: panel menggantikan form (bukan modal) dengan 3 langkah berikutnya + CTA ke simulasi.
+Panel kanan: 4 manfaat bernomor.
 
 ---
 
 ## 7. Antarmuka ujian CAT
 
-File: `exam-interface/index.html`
+Tujuan tunggal: **konsentrasi**. Emas hanya untuk timer, penanda ragu-ragu, dan aksi utama.
 
-Ini layar paling kritis. Tujuan tunggal: **konsentrasi**. Tidak ada navigasi ke halaman lain, tidak ada dekorasi yang bergerak selain timer.
-
-### 7.1 Anatomi desktop
+### 7.1 Desktop
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ [logo] Judul ujian · Bagian 1/3     SISA WAKTU    [Akhiri]   │ 62px, ink
-│        TWK                          01:32:47                 │
-├──────────────────────────────────────────────────────────────┤ progres 3px lime
-│ 01 TWK 19/30 │ 🔒 02 TIU 0/35 │ 🔒 03 TKP 0/45                │ 46px, paper
+│ [mark] Judul ujian · Bagian 1/3      SISA WAKTU   [Akhiri]   │ 64px navy
+│                                     01:32:47                 │
+├──────────────────────────────────────────────────────────────┤ rail emas 3px
+│ 01 TWK 19/30 │ 🔒 02 TIU 0/35 │ 🔒 03 TKP 0/45                │ 46px putih
 ├───────────────────────────────────┬──────────────────────────┤
-│ 27 / 30  [TWK] [Konten contoh]  ⚑ │ Navigasi soal   19/30    │
-│                                   │ ● dijawab ● ragu ● aktif │
-│ Teks soal …                       │ ┌──┬──┬──┬──┬──┐         │
-│                                   │ │1 │2 │3 │… │  │         │
-│ Ⓐ opsi …                          │ └──┴──┴──┴──┴──┘         │
-│ Ⓑ opsi …                          │ 19    11     2           │
-│ Ⓒ opsi …                          │ [Akhiri ujian]           │
-│ Ⓓ opsi …                          │                          │
-│ Ⓔ opsi …                          │                          │
-├───────────────────────────────────┤                          │
+│ 27 / 30 [TWK] [Konten contoh]  ⚑  │ Navigasi soal   19/30    │
+│ Teks soal …                       │ legend                   │
+│ Ⓐ opsi …                          │ grid 5 kolom             │
+│ …                                 │ 19 · 11 · 2              │
+├───────────────────────────────────┤ [Akhiri ujian]           │
 │ ← Sebelumnya        [Berikutnya →] │                          │
 └───────────────────────────────────┴──────────────────────────┘
 ```
 
-- Baris atas: 3 kolom (`1fr auto 1fr`) — timer selalu tepat di tengah agar mata menemukannya dengan cepat.
-- Progres: garis 3px lime di bawah header, lebar = terjawab/total bagian.
-- Tab bagian: bagian aktif bergaris bawah ink; bagian terkunci memakai ikon gembok + `aria-disabled="true"` + tooltip. **Jika aturan ujian membolehkan pindah bagian, hapus state terkunci** — struktur grid sudah mendukung 3+ bagian.
-- Kartu soal: min-height `calc(100dvh - 200px)` agar footer tidak “melompat” antar soal.
-- Sidebar 312px, sticky `top:130px`, `max-height: calc(100dvh - 160px)`, grid nomor bisa di-scroll sendiri.
+- Timer selalu di tengah (grid `1fr auto 1fr`).
+- Rail emas = terjawab/total bagian.
+- Kartu soal min-height `calc(100dvh - 210px)` agar footer tidak melompat.
+- Sidebar 316px, sticky `top:132px`.
 
-### 7.2 Anatomi mobile (≤1080px)
+### 7.2 Mobile ≤1080px
 
-- Header 56px: kiri “SOAL 27/30”, tengah timer, kanan “Akhiri ujian” (label tetap terlihat).
-- Tab bagian tetap, bisa di-scroll horizontal.
-- Kartu soal full width; opsi min-height 58px, jarak 10px.
-- Bar bawah fixed 3 kolom: `←` (46px) · “19/30” (buka navigator) · “Berikutnya” (primary).
-- Footer kartu disembunyikan (digantikan bar bawah).
-- Navigator menjadi **bottom sheet** (bukan drawer samping): radius atas 16px, handle, judul + tombol tutup, legend, grid 6 kolom, `max-height: 82dvh`, backdrop, `Esc` menutup.
-- Body diberi `padding-bottom: 96px` agar konten tidak tertutup bar.
+Header 58px (soal / timer / akhiri), tab bagian bisa di-scroll, kartu penuh,
+bar bawah 3 slot (`←` · `19/30` · `Berikutnya`), navigator menjadi bottom sheet 6 kolom
+dengan handle + backdrop, `max-height 82dvh`.
 
-### 7.3 Interaksi wajib
+### 7.3 Interaksi
 
 | Aksi | Perilaku |
 |---|---|
-| Pilih opsi | Simpan jawaban, perbarui navigator + statistik + progres, tanpa reload |
-| Tandai ragu-ragu | Toggle; tombol berubah label “Ditandai”, `aria-pressed`, titik amber di grid |
-| Sebelumnya / Berikutnya | Pindah soal; di soal pertama/terakhir tombol dinonaktifkan (bukan disembunyikan) |
-| Klik nomor di grid | Pindah soal, tutup sheet di mobile, scroll ke atas |
-| Pintasan 1–5 | Pilih opsi A–E |
-| Pintasan ← → | Navigasi soal |
-| Pintasan F | Toggle ragu-ragu |
-| Akhiri ujian | Modal konfirmasi dengan ringkasan (dijawab/belum/ragu) |
-| Timer ≤ 5 menit | Header timer berubah amber, `aria-live` sekali |
-| Timer ≤ 1 menit | Merah + pulse |
-| Timer 0 | Modal konfirmasi terbuka otomatis |
-| Konfirmasi akhir | Layar “Ujian terkirim” dengan ringkasan + CTA ke analisis |
+| Pilih opsi | Simpan, perbarui grid + statistik + rail |
+| Tandai | Toggle, `aria-pressed`, titik emas di grid |
+| Sebelumnya/Berikutnya | Pindah; nonaktif di ujung |
+| Klik nomor | Pindah, tutup sheet, scroll atas |
+| `1–5` / `←` `→` / `F` | Pilih opsi / navigasi / tandai |
+| Akhiri | Modal dengan ringkasan 3 angka |
+| ≤5 menit | Timer emas + satu pengumuman ARIA |
+| ≤1 menit | Timer merah + pulse |
+| Konfirmasi | Layar “Ujian terkirim” + ringkasan |
 
 ### 7.4 Aturan tampilan soal
 
-- Teks soal 17px/1.72, maks 70ch, `letter-spacing: -0.003em`.
-- Stimulus/bacaan: blok terpisah, latar `#F5F2E9`, border kiri 3px, label mono “BACAAN”. Harus tetap terbaca saat soal panjang (tidak dipotong, tidak di-scroll internal).
-- Opsi selalu 5 (A–E) untuk TWK/TIU; TKP juga 5. Jika jumlah opsi berbeda, layout tetap (grid gap 10px, min-height 56px).
-- Huruf opsi memakai bulatan 26px — konsisten dengan motif answer sheet.
-- Jangan menampilkan benar/salah selama ujian berlangsung.
+- Teks 17px/1.72, maks 70ch.
+- Stimulus: blok krem, border kiri emas 3px, label “BACAAN”, tumbuh tanpa scroll internal.
+- Opsi selalu 5 (A–E); layout tetap jika jumlah berbeda.
+- Jangan menampilkan benar/salah selama ujian.
 
 ### 7.5 Yang tidak boleh diubah tanpa keputusan produk
 
-- Komposisi bagian (TWK/TIU/TKP) dan jumlah soal per bagian → ambil dari konfigurasi backend.
-- Aturan penilaian (termasuk skoring TKP 1–5) → tidak divisualisasikan di UI ujian.
-- Perpindahan antar bagian → ikuti aturan ujian yang berlaku.
-- Durasi total → dari konfigurasi, bukan hardcode.
+Komposisi bagian, jumlah soal, aturan penilaian (termasuk skoring TKP), perpindahan antar bagian,
+dan durasi total — semuanya dari konfigurasi backend, bukan hardcode.
 
 ---
 
-## 8. Spesifikasi responsif ringkas
+## 8. Responsif
 
 | Halaman | 360px | 768px | 1280px |
 |---|---|---|---|
-| Landing | 1 kolom, CTA full width, sticky CTA bawah, burger menu, visual hero tanpa kartu mengambang | 2 kolom untuk fitur, nav masih burger (<940) | Nav penuh, hero 2 kolom, 3 tier sejajar |
-| Masuk | Form saja, panel visual disembunyikan | Form saja | 2 kolom |
-| Daftar | Form saja, indikator kekuatan full width | Form saja | 2 kolom |
-| Ujian | Bar bawah + sheet, header 56px | Sama (sheet), kartu full width | Sidebar 312px, footer kartu terlihat |
+| Landing | 1 kolom, CTA penuh, floating CTA, burger | 2 kolom kartu | Header penuh, hero 2 kolom, 3 tier sejajar |
+| Masuk | Form saja | Form saja | 2 kolom |
+| Daftar | Form saja | Form saja | 2 kolom |
+| Ujian | Bar bawah + sheet | Sheet, kartu penuh | Sidebar 316px |
 
-Tidak boleh ada horizontal scroll di 360px. Tabel/heatmap harus mengecil atau di-scroll di dalam kontainernya sendiri.
+Tidak boleh ada horizontal scroll di 360px.
 
 ---
 
 ## 9. Aset & ikon
 
-- **Tidak ada gambar raster.** Semua visual produk dibuat dari HTML/SVG agar tajam dan mudah diimplementasikan.
-- Logo: SVG inline 32×32.
-- Ikon: outline 16/20/24, stroke 1.5–1.8, `currentColor`.
-- Grafik: SVG/CSS (ring, bar, sparkline, heatmap). Tidak memakai library chart agar bundle kecil; jika perlu interaktif, gunakan Recharts/Chart.js dengan warna dari token `--dv-*`.
-- Font: self-hosted di `assets/fonts/`.
+- Tidak ada gambar raster. Semua visual dari HTML/SVG.
+- Ikon outline 24px, stroke 2–2.4, `currentColor`.
+- Font self-hosted: Plus Jakarta Sans (400–800).
+- Grafik: CSS/SVG (ring, bar, trace, heatmap). Warna dari `--dv-*`.
 
 ---
 
-## 10. Catatan implementasi untuk programmer
+## 10. Catatan implementasi
 
-1. **Jangan** mengubah `tokens.css` secara ad-hoc. Tambah token baru jika perlu, lalu dokumentasikan.
-2. Struktur komponen yang disarankan: `Button`, `Input`, `Field`, `Badge`, `Card`, `Panel`, `ProgressBar`, `Tabs`, `Modal`, `Sheet`, `QuestionNav`, `OptionRow`, `Timer`.
-3. Semua state interaktif memakai kelas `is-*` + atribut ARIA. Jangan mengandalkan `:hover` untuk informasi penting.
-4. Timer: hitung dari `ends_at` server, bukan `setInterval` kumulatif (drift). Sinkronkan ulang setiap 30 detik.
-5. Jawaban: autosave per perubahan (debounce 400ms) + indikator “tersimpan” yang tenang (tanpa toast).
-6. Fokus: setelah pindah soal, fokuskan opsi pertama dengan `preventScroll`, kecuali pengguna memakai mouse.
-7. Aksesibilitas: `role="radiogroup"` + `aria-labelledby` untuk opsi; `role="group"` untuk grid nomor.
-8. Jangan menaruh `autofocus` pada input saat halaman ujian dimuat (mengganggu pembaca layar); fokuskan ke judul soal.
-9. Data ilustratif pada landing **wajib** diberi label; saat data nyata tersedia, hapus label dan ganti sumbernya.
-10. Komponen paket: harga, jumlah simulasi, dan fitur harus datang dari API — jangan hardcode.
+1. Jangan menambah warna di luar token.
+2. Komponen: `Button`, `Input`, `Field`, `Badge`, `Card`, `Panel`, `Tabs`, `Modal`, `Sheet`,
+   `QuestionNav`, `OptionRow`, `Timer`.
+3. State `is-*` + ARIA. Jangan andalkan `:hover` untuk informasi penting.
+4. Timer dari `ends_at` server, sinkron tiap 30 detik (jangan akumulasi `setInterval`).
+5. Autosave jawaban per perubahan (debounce 400ms), indikator tenang tanpa toast.
+6. Fokus opsi pertama hanya saat navigasi keyboard.
+7. `role="radiogroup"` untuk opsi, `role="group"` untuk grid nomor.
+8. Jangan `autofocus` saat halaman ujian dimuat.
+9. Angka ilustratif wajib berlabel; harga & fasilitas dari API.
+10. Hapus panel “Pratinjau state prototipe” dan chip “Demo sisa …” sebelum produksi.
 
 ---
 
-## 11. Evaluasi mandiri terhadap kriteria
+## 11. Evaluasi mandiri
 
 | # | Kriteria | Hasil | Bukti |
 |---|---|---|---|
-| 1 | Keunggulan dipahami dalam 5 detik | ✅ | H1 menyatakan masalah + penyangkalan asumsi umum; visual langsung memperlihatkan skor, materi bocor, dan waktu |
-| 2 | Menarik untuk Gen Z, tetap profesional | ✅ | Bricolage + highlighter + angka mono; tanpa ilustrasi kekanak-kanakan |
-| 3 | CTA pendaftaran mudah ditemukan | ✅ | Navbar, hero, paket, CTA band, sticky mobile |
-| 4 | Analisis hasil sebagai pembeda | ✅ | 3 blok fitur + 3 tab preview, semuanya UI nyata |
-| 5 | Manajemen waktu divisualisasikan jelas | ✅ | Trace batang per soal, stat rata-rata/terlama/efisiensi, rekomendasi pembagian waktu |
-| 6 | Login & daftar mudah | ✅ | 2 dan 4 field, validasi inline, state loading/sukses, panel manfaat |
-| 7 | Antarmuka ujian mendukung konsentrasi | ✅ | Satu aksi dominan per area, timer tetap di tengah, warna terbatas, tanpa animasi mengganggu |
-| 8 | Mobile setara | ✅ | Layout khusus < 1080px, bottom sheet, bar aksi 46px, target sentuh ≥ 46px |
-| 9 | Dapat diimplementasikan tanpa menebak | ✅ | Token lengkap, spesifikasi state, ukuran eksplisit, kode acuan |
-| 10 | Mendukung ekspansi bisnis | ✅ | Kartu program generik, tab bagian ujian fleksibel, komponen paket berbasis data |
+| 1 | Keunggulan dipahami 5 detik | ✅ | H1 + kartu hasil langsung menyatakan masalah & solusi |
+| 2 | Menarik, tetap profesional | ✅ | Navy/emas berwibawa; emas dibatasi |
+| 3 | CTA mudah ditemukan | ✅ | Header, hero, paket, CTA penutup, floating mobile |
+| 4 | Analisis sebagai pembeda | ✅ | 3 kartu fitur + 3 tab contoh analisis |
+| 5 | Manajemen waktu jelas | ✅ | Trace per soal, 3 stat, rekomendasi pembagian waktu |
+| 6 | Login & daftar mudah | ✅ | 2 dan 4 field, validasi inline, state lengkap |
+| 7 | Ujian mendukung konsentrasi | ✅ | Emas minimal, timer tetap, satu aksi dominan per area |
+| 8 | Mobile setara | ✅ | Bottom sheet, bar 46px, target sentuh ≥46px |
+| 9 | Dapat diimplementasikan | ✅ | Token lengkap, spesifikasi state, kode acuan |
+| 10 | Mendukung ekspansi | ✅ | Kartu program generik, tab bagian fleksibel, tier berbasis data |
 
-**Perbaikan yang dilakukan setelah evaluasi:** ukuran H1 hero diturunkan (60px) agar tidak memecah highlight; kartu mengambang dipindah agar tidak menutupi data; heatmap diperkecil ke sel 12px; `[hidden]` dipaksa `display:none` agar state form tidak bocor; brand dipindah ke `base.css` agar konsisten antar halaman; label “Akhiri ujian” dipertahankan di mobile.
+**Perbaikan setelah evaluasi v2:** ukuran H1 diturunkan agar tetap 2 baris (42px desktop, 27px mobile);
+kartu kaca di hero dibuat lebih pekat agar grid tidak mengganggu keterbacaan bar; emas dikeluarkan
+dari state “sudah dijawab” (diganti biru) supaya hanya dipakai untuk perhatian.
