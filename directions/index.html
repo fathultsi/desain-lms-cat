@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LMS-CAT · Rekomendasi Arah Desain</title>
+<meta name="theme-color" content="#111318">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/fonts-directions.css">
+<style>
+/* ============================ PAGE CHROME ============================ */
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:#F2F3F5; color:#16181D;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{text-decoration:none;color:inherit}
+.wrap{width:100%;max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+
+.page-head{padding:clamp(40px,6vw,72px) 0 clamp(24px,3vw,36px);background:#fff;border-bottom:1px solid #E2E4E9}
+.page-head h1{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(28px,4vw,44px);letter-spacing:-.035em;line-height:1.05;margin-top:14px;max-width:24ch}
+.page-head p{margin-top:14px;max-width:62ch;color:#545A68;font-size:16px;line-height:1.6}
+.kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7A8090}
+
+/* direction info bar */
+.dirbar{background:#fff;border-top:1px solid #E2E4E9;border-bottom:1px solid #E2E4E9}
+.dirbar__in{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);padding-block:clamp(22px,3vw,32px);align-items:start}
+.dirbar__n{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7A8090}
+.dirbar__n b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#16181D;color:#fff;font-size:10px;letter-spacing:0}
+.dirbar h2{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.03em;margin-top:10px}
+.dirbar p{font-size:14.5px;line-height:1.6;color:#545A68;margin-top:8px;max-width:52ch}
+.dirbar__meta{display:grid;gap:10px;font-size:13px;line-height:1.5;color:#545A68}
+.dirbar__meta b{color:#16181D;font-weight:700}
+.sw{display:flex;gap:6px;margin-top:2px}
+.sw i{width:26px;height:26px;border-radius:6px;border:1px solid rgba(0,0,0,.12)}
+
+/* canvas wrapper */
+.canvas{padding:clamp(28px,4vw,48px) 0 clamp(36px,5vw,60px);border-bottom:8px solid #E2E4E9}
+.canvas__frame{
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 2px 4px rgba(16,18,24,.05), 0 24px 60px -30px rgba(16,18,24,.35);
+}
+
+/* ============================ SHARED DIRECTION PARTS ============================ */
+.dir{
+  background:var(--d-bg); color:var(--d-fg);
+  font-family:var(--d-font);
+  padding:0 clamp(18px,3vw,44px) clamp(24px,3vw,40px);
+  position:relative; overflow:hidden;
+}
+.dir p,.dir span,.dir em,.dir b{font-family:inherit}
+
+.dnav{display:flex;align-items:center;gap:clamp(16px,3vw,34px);padding-block:18px;border-bottom:var(--d-border);position:relative;z-index:2}
+.dnav__brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;letter-spacing:-.02em}
+.dnav__mark{width:26px;height:26px;border-radius:var(--d-mark-r,7px);background:var(--d-accent);flex:none;display:grid;place-items:center}
+.dnav__mark::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--d-accent-fg)}
+.dnav__links{display:flex;gap:20px;font-size:13px;color:var(--d-muted);margin-left:8px}
+.dnav__cta{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+.dbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  height:38px;padding:0 15px;border-radius:var(--d-btn-r);
+  font-size:13px;font-weight:700;letter-spacing:-.01em;cursor:pointer;
+  border:var(--d-border);transition:transform .15s ease, background .15s ease;
+  white-space:nowrap;
+}
+.dbtn--primary{background:var(--d-accent);color:var(--d-accent-fg);border-color:var(--d-accent)}
+.dbtn--outline{background:transparent;color:var(--d-fg)}
+.dbtn--ghost{background:transparent;color:var(--d-fg);border-color:transparent}
+.dbtn--lg{height:46px;padding:0 20px;font-size:14px}
+.dbtn:hover{transform:translateY(-1px)}
+
+.dhero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,52px);align-items:center;padding-block:clamp(32px,5vw,56px);position:relative;z-index:2}
+.deyebrow{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--d-muted)}
+.deyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--d-accent)}
+.dh1{
+  font-family:var(--d-display); font-weight:var(--d-h1-w,700);
+  font-size:var(--d-h1-size,clamp(28px,3.5vw,44px)); line-height:1.02;
+  letter-spacing:var(--d-h1-tr,-.035em); margin-top:18px; color:var(--d-fg);
+  text-wrap:balance;
+}
+.dh1 .hl{color:var(--d-accent)}
+.dh1 .box{
+  background:var(--d-2); color:var(--d-2-fg,#0A0A0A);
+  padding:0 .12em; box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+.dsub{margin-top:16px;font-size:14.5px;line-height:1.62;color:var(--d-muted);max-width:42ch}
+.dcta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+.dcard{
+  background:var(--d-surface);border:var(--d-border);border-radius:var(--d-radius);
+  box-shadow:var(--d-shadow);padding:18px;position:relative;
+}
+.dcard__top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:var(--d-border)}
+.dcard__id{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--d-muted)}
+.dbadge{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 7px;border-radius:var(--d-badge-r,4px);border:var(--d-border);color:var(--d-muted)}
+.dscore{display:flex;align-items:center;gap:14px;padding-block:16px}
+.dring{position:relative;width:88px;height:88px;border-radius:50%;background:conic-gradient(var(--d-accent) 0 75%,var(--d-track) 75%);display:grid;place-items:center;flex:none}
+.dring__in{width:66px;height:66px;border-radius:50%;background:var(--d-surface);display:grid;place-content:center;text-align:center}
+.dring__in b{font-size:22px;letter-spacing:-.04em;line-height:1;color:var(--d-fg)}
+.dring__in span{font-family:"JetBrains Mono",monospace;font-size:7px;letter-spacing:.12em;color:var(--d-muted);margin-top:2px}
+.dmeta{font-size:10px;color:var(--d-muted);text-transform:uppercase;letter-spacing:.08em;font-family:"JetBrains Mono",monospace}
+.ddelta{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 8px;border-radius:var(--d-badge-r,4px);font-size:11px;font-weight:700;background:var(--d-ok-bg);color:var(--d-ok)}
+.dbars{display:grid;gap:9px}
+.dbar{display:grid;grid-template-columns:34px 1fr 30px;align-items:center;gap:9px;font-size:10px;font-family:"JetBrains Mono",monospace;color:var(--d-muted)}
+.dbar i{display:block;height:6px;border-radius:var(--d-bar-r,99px);background:var(--d-track);overflow:hidden}
+.dbar i b{display:block;height:100%;border-radius:var(--d-bar-r,99px);background:var(--d-accent)}
+.dbar i b.b2{background:var(--d-2)}
+.dbar i b.b3{background:var(--d-ok)}
+.dbar em{font-style:normal;text-align:right;color:var(--d-fg)}
+.dchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;padding-top:12px;border-top:var(--d-border)}
+.dchip{font-size:10px;padding:4px 8px;border-radius:var(--d-badge-r,4px);background:var(--d-warn-bg);color:var(--d-warn);font-weight:700}
+
+/* kit */
+.dkit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:clamp(18px,3vw,26px);border-top:var(--d-border);position:relative;z-index:2}
+.dkit__item{display:grid;gap:8px}
+.dkit__k{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--d-muted)}
+.dkit__row{display:flex;gap:8px;flex-wrap:wrap}
+.dinput{height:38px;padding:0 12px;border-radius:var(--d-btn-r);border:var(--d-border);background:var(--d-input-bg,transparent);color:var(--d-fg);font-size:13px;font-family:inherit;width:100%}
+.dinput::placeholder{color:var(--d-muted)}
+.dopt{display:flex;gap:10px;align-items:center;padding:9px 11px;border:var(--d-border);border-radius:var(--d-btn-r);font-size:12px;line-height:1.35;background:var(--d-opt-bg,transparent)}
+.dopt span{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:var(--d-border);font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700}
+.dopt.is-on{background:var(--d-opt-on-bg);border-color:var(--d-accent)}
+.dopt.is-on span{background:var(--d-accent);border-color:var(--d-accent);color:var(--d-accent-fg)}
+
+/* ============================ A · MIDNIGHT INSTRUMENT ============================ */
+.dir--a{
+  --d-bg:#070A11; --d-fg:#F2F5FB; --d-muted:#8B95AB;
+  --d-surface:#0F1522; --d-line:#212A3D; --d-track:#1B2437;
+  --d-accent:#FF6B2C; --d-accent-fg:#140800; --d-2:#5B8CFF; --d-2-fg:#04070F;
+  --d-ok:#2FD9A0; --d-ok-bg:rgba(47,217,160,.14);
+  --d-warn:#FF9E7A; --d-warn-bg:rgba(255,107,44,.13);
+  --d-radius:14px; --d-btn-r:10px; --d-badge-r:5px; --d-bar-r:99px;
+  --d-border:1px solid #212A3D;
+  --d-shadow:0 40px 80px -40px rgba(0,0,0,.95), 0 0 0 1px rgba(255,255,255,.03) inset;
+  --d-font:"Space Grotesk",system-ui,sans-serif;
+  --d-display:"Space Grotesk",system-ui,sans-serif;
+  --d-h1-w:700; --d-h1-tr:-.035em;
+  --d-opt-bg:rgba(255,255,255,.02); --d-opt-on-bg:rgba(255,107,44,.10);
+}
+.dir--a::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 82% 8%, rgba(255,107,44,.16), transparent 65%),
+    radial-gradient(45% 40% at 10% 90%, rgba(91,140,255,.12), transparent 70%);
+}
+.dir--a .dcard{background:linear-gradient(180deg,#111827 0%,#0D131F 100%)}
+.dir--a .dring__in{background:#0A0F19;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+
+/* ============================ B · HIGH-CONTRAST POSTER ============================ */
+.dir--b{
+  --d-bg:#FFFFFF; --d-fg:#0A0A0A; --d-muted:#5E5E5E;
+  --d-surface:#FFFFFF; --d-line:#0A0A0A; --d-track:#EDEDED;
+  --d-accent:#1F4BFF; --d-accent-fg:#FFFFFF; --d-2:#FFD84D; --d-2-fg:#0A0A0A;
+  --d-ok:#00875A; --d-ok-bg:#DFF5EA;
+  --d-warn:#B3261E; --d-warn-bg:#FFE7E4;
+  --d-radius:0px; --d-btn-r:0px; --d-badge-r:0px; --d-bar-r:0px;
+  --d-border:2px solid #0A0A0A;
+  --d-shadow:8px 8px 0 #0A0A0A;
+  --d-font:"Public Sans",system-ui,sans-serif;
+  --d-display:"Archivo Black",system-ui,sans-serif;
+  --d-h1-w:400; --d-h1-tr:-.025em; --d-h1-size:clamp(24px,2.7vw,34px);
+  --d-opt-bg:#FFFFFF; --d-opt-on-bg:#EAEFFF;
+  --d-mark-r:0px;
+}
+.dir--b .dnav{border-bottom-width:3px}
+.dir--b .dcard{border-width:3px;box-shadow:8px 8px 0 #0A0A0A}
+.dir--b .dbtn--primary{box-shadow:3px 3px 0 #0A0A0A}
+.dir--b .dbtn--outline{box-shadow:3px 3px 0 #0A0A0A}
+.dir--b .dbtn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #0A0A0A}
+.dir--b .dbadge{border-width:1.5px;font-weight:700}
+.dir--b .dring__in{border:2px solid #0A0A0A}
+.dir--b .dopt{border-width:2px}
+.dir--b .dopt.is-on{box-shadow:3px 3px 0 #1F4BFF}
+.dir--b .dh1{line-height:.98}
+
+/* ============================ C · SOFT FOCUS ============================ */
+.dir--c{
+  --d-bg:#F3F5FF; --d-fg:#191D3A; --d-muted:#69708F;
+  --d-surface:#FFFFFF; --d-line:#E3E6F4; --d-track:#EDEFFA;
+  --d-accent:#5A5BE6; --d-accent-fg:#FFFFFF; --d-2:#4FC79B; --d-2-fg:#0E3B2C;
+  --d-ok:#0F9D74; --d-ok-bg:#DDF6EC;
+  --d-warn:#C2410C; --d-warn-bg:#FFEDE4;
+  --d-radius:24px; --d-btn-r:999px; --d-badge-r:999px; --d-bar-r:99px;
+  --d-border:1px solid #E3E6F4;
+  --d-shadow:0 30px 70px -34px rgba(90,91,230,.42);
+  --d-font:"DM Sans",system-ui,sans-serif;
+  --d-display:"Outfit",system-ui,sans-serif;
+  --d-h1-w:600; --d-h1-tr:-.032em;
+  --d-opt-bg:#FFFFFF; --d-opt-on-bg:#EEEEFE;
+  --d-mark-r:9px;
+}
+.dir--c::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(55% 50% at 88% 4%, rgba(185,243,218,.75), transparent 70%),
+    radial-gradient(50% 45% at 4% 88%, rgba(214,214,255,.85), transparent 70%);
+}
+.dir--c .dcard{border:1px solid #E9EBF7;box-shadow:0 24px 60px -26px rgba(90,91,230,.32)}
+.dir--c .dbtn--outline{background:#fff;border-color:#E1E4F2}
+.dir--c .dinput{background:#fff;border-color:#E1E4F2}
+.dir--c .dopt{border-color:#E7E9F6}
+.dir--c .dnav__links{color:#69708F}
+
+/* ============================ COMPARE / RECO ============================ */
+.rec{padding:clamp(36px,5vw,64px) 0 clamp(48px,6vw,80px);background:#fff;border-top:1px solid #E2E4E9}
+.rec h2{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(22px,3vw,32px);letter-spacing:-.03em}
+table.cmp{width:100%;border-collapse:collapse;margin-top:22px;font-size:13.5px}
+table.cmp th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#7A8090;padding:10px 12px;border-bottom:1.5px solid #16181D;font-weight:500}
+table.cmp td{padding:12px;border-bottom:1px solid #E7E9EE;color:#4A505E;vertical-align:top;line-height:1.5}
+table.cmp td:first-child{font-weight:700;color:#16181D;white-space:nowrap}
+.pick{margin-top:28px;padding:22px;border:2px solid #16181D;border-radius:14px;background:#FAFAF7}
+.pick__k{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#7A8090}
+.pick h3{font-family:"Bricolage Grotesque",sans-serif;font-size:19px;letter-spacing:-.02em;margin-top:8px}
+.pick p{font-size:14px;line-height:1.6;color:#4A505E;margin-top:8px;max-width:70ch}
+
+@media (max-width:900px){
+  .dhero{grid-template-columns:1fr;gap:28px}
+  .dkit{grid-template-columns:1fr;gap:14px}
+  .dnav__links{display:none}
+  .dirbar__in{grid-template-columns:1fr}
+  .canvas{padding-inline:0}
+}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="kicker">Eksplorasi arah · 3 opsi</span>
+    <h1>Tiga arah desain untuk LMS-CAT.</h1>
+    <p>Konten, angka, dan struktur halaman sengaja dibuat identik di ketiganya — yang berubah hanya warna, tipografi, dan bahasa bentuk. Jadi yang kamu nilai benar-benar visualnya, bukan isinya.</p>
+  </div>
+</header>
+
+<!-- ============================ A ============================ -->
+<div class="dirbar">
+  <div class="wrap dirbar__in">
+    <div>
+      <span class="dirbar__n"><b>A</b> Arah pertama</span>
+      <h2>Midnight Instrument</h2>
+      <p>Permukaan gelap seperti instrumen ukur. Data jadi pusat perhatian karena grafik dan angka “menyala” di atas latar gelap. Paling jauh dari kompetitor yang umumnya biru-putih.</p>
+    </div>
+    <div class="dirbar__meta">
+      <div><b>Cocok untuk</b> — kesan premium, produk yang menjual data, audiens yang sudah terbiasa aplikasi gelap.</div>
+      <div><b>Risiko</b> — bisa terasa seperti aplikasi trading/gaming; layar ujian sebaiknya tetap terang untuk membaca lama.</div>
+      <div class="sw">
+        <i style="background:#070A11"></i><i style="background:#FF6B2C"></i><i style="background:#5B8CFF"></i><i style="background:#2FD9A0"></i><i style="background:#F2F5FB"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="canvas" id="a">
+  <div class="wrap">
+    <div class="canvas__frame">
+      <div class="dir dir--a">
+        <nav class="dnav">
+          <div class="dnav__brand"><span class="dnav__mark"></span> LMS·CAT</div>
+          <div class="dnav__links"><span>Fitur</span><span>Cara Kerja</span><span>Paket</span></div>
+          <div class="dnav__cta">
+            <span class="dbtn dbtn--ghost">Masuk</span>
+            <span class="dbtn dbtn--primary">Daftar</span>
+          </div>
+        </nav>
+
+        <div class="dhero">
+          <div>
+            <span class="deyebrow">Simulasi CAT · SKD CPNS 2027</span>
+            <h2 class="dh1">Nilai tryout mandek.<br>Bukan karena <span class="hl">kurang soal</span>.</h2>
+            <p class="dsub">LMS-CAT membedah setiap jawaban dan setiap detik waktu pengerjaanmu, lalu menyusun prioritas belajar yang jelas.</p>
+            <div class="dcta">
+              <span class="dbtn dbtn--primary dbtn--lg">Mulai Tryout Gratis →</span>
+              <span class="dbtn dbtn--outline dbtn--lg">Lihat contoh analisis</span>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="dcard__top">
+              <span class="dcard__id">Simulasi #4 · SKD</span>
+              <span class="dbadge">Data ilustratif</span>
+            </div>
+            <div class="dscore">
+              <div class="dring"><div class="dring__in"><b>412</b><span>SKOR</span></div></div>
+              <div>
+                <div class="dmeta">Total</div>
+                <div class="ddelta">↑ +38 poin</div>
+              </div>
+            </div>
+            <div class="dbars">
+              <div class="dbar"><span>TWK</span><i><b style="width:63%"></b></i><em>95</em></div>
+              <div class="dbar"><span>TIU</span><i><b class="b2" style="width:64%"></b></i><em>112</em></div>
+              <div class="dbar"><span>TKP</span><i><b class="b3" style="width:91%"></b></i><em>205</em></div>
+            </div>
+            <div class="dchips">
+              <span class="dchip">Deret angka 41%</span>
+              <span class="dchip">Silogisme 48%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dkit">
+          <div class="dkit__item">
+            <span class="dkit__k">Tombol</span>
+            <div class="dkit__row"><span class="dbtn dbtn--primary">Daftar</span><span class="dbtn dbtn--outline">Lihat</span></div>
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Input</span>
+            <input class="dinput" placeholder="nama@email.com">
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Opsi jawaban</span>
+            <div class="dopt is-on"><span>A</span>Pancasila menjadi sumber hukum tertinggi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ B ============================ -->
+<div class="dirbar">
+  <div class="wrap dirbar__in">
+    <div>
+      <span class="dirbar__n"><b>B</b> Arah kedua</span>
+      <h2>High-Contrast Poster</h2>
+      <p>Garis tebal, bayangan keras, tipografi hitam pekat. Terasa seperti poster cetak: berani, langsung, dan sangat mudah diingat. Paling menonjol di feed media sosial.</p>
+    </div>
+    <div class="dirbar__meta">
+      <div><b>Cocok untuk</b> — membangun ingatan merek, kampanye, audiens Gen Z yang bosan tampilan “soft”.</div>
+      <div><b>Risiko</b> — kontras tinggi melelahkan untuk sesi belajar 100 menit; kurang cocok jadi warna utama layar ujian.</div>
+      <div class="sw">
+        <i style="background:#FFFFFF"></i><i style="background:#0A0A0A"></i><i style="background:#1F4BFF"></i><i style="background:#FFD84D"></i><i style="background:#00875A"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="canvas" id="b">
+  <div class="wrap">
+    <div class="canvas__frame">
+      <div class="dir dir--b">
+        <nav class="dnav">
+          <div class="dnav__brand"><span class="dnav__mark"></span> LMS·CAT</div>
+          <div class="dnav__links"><span>Fitur</span><span>Cara Kerja</span><span>Paket</span></div>
+          <div class="dnav__cta">
+            <span class="dbtn dbtn--ghost">Masuk</span>
+            <span class="dbtn dbtn--primary">Daftar</span>
+          </div>
+        </nav>
+
+        <div class="dhero">
+          <div>
+            <span class="deyebrow">Simulasi CAT · SKD CPNS 2027</span>
+            <h2 class="dh1">Nilai tryout mandek.<br>Bukan karena <span class="box">kurang soal</span>.</h2>
+            <p class="dsub">LMS-CAT membedah setiap jawaban dan setiap detik waktu pengerjaanmu, lalu menyusun prioritas belajar yang jelas.</p>
+            <div class="dcta">
+              <span class="dbtn dbtn--primary dbtn--lg">Mulai Tryout Gratis →</span>
+              <span class="dbtn dbtn--outline dbtn--lg">Lihat contoh analisis</span>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="dcard__top">
+              <span class="dcard__id">Simulasi #4 · SKD</span>
+              <span class="dbadge">Data ilustratif</span>
+            </div>
+            <div class="dscore">
+              <div class="dring"><div class="dring__in"><b>412</b><span>SKOR</span></div></div>
+              <div>
+                <div class="dmeta">Total</div>
+                <div class="ddelta">↑ +38 poin</div>
+              </div>
+            </div>
+            <div class="dbars">
+              <div class="dbar"><span>TWK</span><i><b style="width:63%"></b></i><em>95</em></div>
+              <div class="dbar"><span>TIU</span><i><b class="b2" style="width:64%"></b></i><em>112</em></div>
+              <div class="dbar"><span>TKP</span><i><b class="b3" style="width:91%"></b></i><em>205</em></div>
+            </div>
+            <div class="dchips">
+              <span class="dchip">Deret angka 41%</span>
+              <span class="dchip">Silogisme 48%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dkit">
+          <div class="dkit__item">
+            <span class="dkit__k">Tombol</span>
+            <div class="dkit__row"><span class="dbtn dbtn--primary">Daftar</span><span class="dbtn dbtn--outline">Lihat</span></div>
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Input</span>
+            <input class="dinput" placeholder="nama@email.com">
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Opsi jawaban</span>
+            <div class="dopt is-on"><span>A</span>Pancasila menjadi sumber hukum tertinggi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ C ============================ -->
+<div class="dirbar">
+  <div class="wrap dirbar__in">
+    <div>
+      <span class="dirbar__n"><b>C</b> Arah ketiga</span>
+      <h2>Soft Focus</h2>
+      <p>Sudut besar, gradasi lembut lavender–mint, tipografi ramah. Menurunkan rasa tegang menghadapi ujian, terasa seperti aplikasi konsumen yang modern.</p>
+    </div>
+    <div class="dirbar__meta">
+      <div><b>Cocok untuk</b> — konversi massal, pengguna yang mudah terintimidasi oleh tampilan “ujian”, kesan bersahabat.</div>
+      <div><b>Risiko</b> — paling mudah tertukar dengan aplikasi lain; pembeda produk jadi kurang terasa.</div>
+      <div class="sw">
+        <i style="background:#F3F5FF"></i><i style="background:#5A5BE6"></i><i style="background:#B9F3DA"></i><i style="background:#191D3A"></i><i style="background:#FFFFFF"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="canvas" id="c">
+  <div class="wrap">
+    <div class="canvas__frame">
+      <div class="dir dir--c">
+        <nav class="dnav">
+          <div class="dnav__brand"><span class="dnav__mark"></span> LMS·CAT</div>
+          <div class="dnav__links"><span>Fitur</span><span>Cara Kerja</span><span>Paket</span></div>
+          <div class="dnav__cta">
+            <span class="dbtn dbtn--ghost">Masuk</span>
+            <span class="dbtn dbtn--primary">Daftar</span>
+          </div>
+        </nav>
+
+        <div class="dhero">
+          <div>
+            <span class="deyebrow">Simulasi CAT · SKD CPNS 2027</span>
+            <h2 class="dh1">Nilai tryout mandek.<br>Bukan karena <span class="hl">kurang soal</span>.</h2>
+            <p class="dsub">LMS-CAT membedah setiap jawaban dan setiap detik waktu pengerjaanmu, lalu menyusun prioritas belajar yang jelas.</p>
+            <div class="dcta">
+              <span class="dbtn dbtn--primary dbtn--lg">Mulai Tryout Gratis →</span>
+              <span class="dbtn dbtn--outline dbtn--lg">Lihat contoh analisis</span>
+            </div>
+          </div>
+
+          <div class="dcard">
+            <div class="dcard__top">
+              <span class="dcard__id">Simulasi #4 · SKD</span>
+              <span class="dbadge">Data ilustratif</span>
+            </div>
+            <div class="dscore">
+              <div class="dring"><div class="dring__in"><b>412</b><span>SKOR</span></div></div>
+              <div>
+                <div class="dmeta">Total</div>
+                <div class="ddelta">↑ +38 poin</div>
+              </div>
+            </div>
+            <div class="dbars">
+              <div class="dbar"><span>TWK</span><i><b style="width:63%"></b></i><em>95</em></div>
+              <div class="dbar"><span>TIU</span><i><b class="b2" style="width:64%"></b></i><em>112</em></div>
+              <div class="dbar"><span>TKP</span><i><b class="b3" style="width:91%"></b></i><em>205</em></div>
+            </div>
+            <div class="dchips">
+              <span class="dchip">Deret angka 41%</span>
+              <span class="dchip">Silogisme 48%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dkit">
+          <div class="dkit__item">
+            <span class="dkit__k">Tombol</span>
+            <div class="dkit__row"><span class="dbtn dbtn--primary">Daftar</span><span class="dbtn dbtn--outline">Lihat</span></div>
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Input</span>
+            <input class="dinput" placeholder="nama@email.com">
+          </div>
+          <div class="dkit__item">
+            <span class="dkit__k">Opsi jawaban</span>
+            <div class="dopt is-on"><span>A</span>Pancasila menjadi sumber hukum tertinggi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ COMPARE ============================ -->
+<section class="rec" id="rekomendasi">
+  <div class="wrap">
+    <span class="kicker">Perbandingan</span>
+    <h2>Mana yang paling cocok untuk LMS-CAT?</h2>
+
+    <table class="cmp">
+      <thead>
+        <tr><th>Arah</th><th>Kesan utama</th><th>Kekuatan</th><th>Kelemahan</th><th>Layar ujian</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A · Midnight</td>
+          <td>Presisi, premium, teknologis</td>
+          <td>Data paling menonjol; paling berbeda dari kompetitor</td>
+          <td>Bisa terasa “aplikasi trading”; kurang ramah untuk pengguna awam</td>
+          <td>Pakai varian terang agar mata tidak lelah</td>
+        </tr>
+        <tr>
+          <td>B · Poster</td>
+          <td>Berani, langsung, mudah diingat</td>
+          <td>Paling kuat untuk kampanye &amp; media sosial</td>
+          <td>Melelahkan untuk membaca lama; berisiko terlihat seperti tren sesaat</td>
+          <td>Tidak disarankan untuk sesi 100 menit</td>
+        </tr>
+        <tr>
+          <td>C · Soft Focus</td>
+          <td>Ramah, tenang, modern</td>
+          <td>Hambatan psikologis paling rendah; aman untuk konversi</td>
+          <td>Paling mudah tertukar dengan aplikasi lain; pembeda lemah</td>
+          <td>Aman, tapi kurang “serius”</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pick">
+      <div class="pick__k">Rekomendasi saya</div>
+      <h3>A — Midnight Instrument, dengan layar ujian versi terang.</h3>
+      <p>
+        Alasannya: produk ini menjual <b>analisis</b>, dan analisis paling meyakinkan saat grafik serta angka jadi pusat perhatian — itu kekuatan A.
+        Ia juga paling sulit ditiru kompetitor, sementara C paling mudah. Layar ujian tetap dibuat terang karena peserta membaca teks panjang
+        selama 100 menit; jadi kita memakai latar gelap untuk <i>branding dan data</i>, latar terang untuk <i>membaca</i>.
+        Kalau prioritasmu justru konversi sebesar-besarnya dengan risiko paling kecil, pilih C.
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
