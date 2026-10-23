@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masuk · LMS-CAT</title>
+<meta name="description" content="Masuk ke akun LMS-CAT untuk melanjutkan simulasi dan melihat analisis hasil tryout.">
+<meta name="theme-color" content="#FAF8F1">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+.auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);min-height:100dvh}
+
+/* ---------------- kolom form ---------------- */
+.auth__form{display:flex;flex-direction:column;padding:24px var(--gutter) 32px;background:var(--white)}
+.auth__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.back{
+  display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);font-weight:700;
+  color:var(--muted);padding:8px 12px;border-radius:var(--r-pill);
+}
+.back:hover{color:var(--ink);background:var(--cream)}
+
+.auth__body{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  width:100%;max-width:410px;margin-inline:auto;padding-block:clamp(2rem,7vh,4rem);
+}
+.auth h1{font-size:clamp(1.6rem,2.4vw,2rem);letter-spacing:-.03em;line-height:1.15;margin-top:20px}
+.auth__sub{margin-top:10px;color:var(--body);font-size:15px;line-height:1.6}
+
+.form{margin-top:26px;display:grid;gap:17px}
+.form__row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.form__link{font-size:var(--text-sm);font-weight:700;color:var(--navy-700)}
+.form__link:hover{text-decoration:underline;text-underline-offset:3px}
+
+.alert{display:flex;gap:10px;padding:13px 15px;border-radius:var(--r-sm);font-size:var(--text-sm);line-height:1.5;font-weight:600;border:1px solid}
+.alert--error{background:var(--red-100);border-color:#F0C9C9;color:#8E2318}
+.alert--ok{background:var(--green-100);border-color:#BFE3D3;color:#0A5F42}
+.alert svg{flex:none;margin-top:2px}
+
+.auth__alt{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:15px;color:var(--body);text-align:center}
+.auth__alt a{font-weight:800;color:var(--navy-700)}
+.auth__alt a:hover{text-decoration:underline;text-underline-offset:3px}
+
+.auth__foot{font-size:var(--text-xs);color:var(--muted);padding-top:18px;display:flex;gap:14px;flex-wrap:wrap}
+.auth__foot a:hover{color:var(--ink);text-decoration:underline}
+
+/* ---------------- kolom visual ---------------- */
+.auth__visual{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(2rem,4vw,3.5rem);
+  background:linear-gradient(165deg,var(--navy-800) 0%,var(--navy-950) 62%,#03101C 100%);
+  color:var(--text-invert);
+}
+.auth__visual::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(800px 420px at 82% -10%,rgba(245,183,0,.22),transparent 62%),
+    radial-gradient(620px 380px at 6% 8%,rgba(35,120,190,.28),transparent 60%);
+}
+.auth__visual::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(110% 80% at 40% 10%,#000 20%,transparent 76%);
+  mask-image:radial-gradient(110% 80% at 40% 10%,#000 20%,transparent 76%);
+}
+.auth__visual > *{position:relative;z-index:1}
+.vis__top{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8FA6BC}
+.vis__top i{width:6px;height:6px;border-radius:50%;background:var(--gold-500)}
+.vis__mid{max-width:420px}
+.vis__mid h2{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.2;letter-spacing:-.03em;color:#fff}
+.vis__mid p{margin-top:14px;color:var(--text-invert-2);font-size:14.5px;line-height:1.7;max-width:38ch}
+
+.vcard{
+  margin-top:clamp(1.5rem,3.5vw,2.25rem);max-width:400px;
+  background:linear-gradient(180deg,rgba(12,38,63,.9),rgba(5,22,40,.86));
+  border:1px solid rgba(255,255,255,.16);border-radius:var(--r-md);padding:18px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.vcard__head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.13)}
+.vcard__id{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8FA6BC}
+.vrow{display:grid;grid-template-columns:40px 1fr 36px;align-items:center;gap:10px;padding-top:12px}
+.vrow span:first-child{font-size:11px;font-weight:800;color:#9FB6CB}
+.vrow span:last-child{font-size:11px;font-weight:800;color:#fff;text-align:right;font-variant-numeric:tabular-nums}
+.vbar{height:6px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden}
+.vbar i{display:block;height:100%;border-radius:99px;background:var(--gold-500)}
+.vbar i.b2{background:#7FB4E8}
+.vbar i.b3{background:#4ADE9B}
+.vis__bottom{display:grid;gap:10px}
+.vpoint{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-invert-2);line-height:1.55}
+.vpoint svg{flex:none;margin-top:2px;color:var(--gold-500)}
+
+@media (max-width:980px){
+  .auth{grid-template-columns:1fr}
+  .auth__visual{display:none}
+  .auth__foot{justify-content:center}
+}
+
+/* pratinjau state */
+.devstates{margin-top:24px;border:1px dashed var(--line-strong);border-radius:var(--r-sm);background:var(--cream);font-size:var(--text-xs)}
+.devstates summary{padding:11px 13px;cursor:pointer;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:8px;list-style:none}
+.devstates summary::-webkit-details-marker{display:none}
+.devstates summary::before{content:"▸";font-size:10px;color:var(--muted)}
+.devstates[open] summary::before{content:"▾"}
+.devstates__body{padding:0 13px 13px;display:flex;flex-wrap:wrap;gap:6px}
+.devstates__body button{
+  padding:6px 10px;border-radius:7px;border:1px solid var(--line-strong);background:var(--white);
+  font-size:10.5px;font-weight:800;color:var(--body);letter-spacing:.02em;
+}
+.devstates__body button:hover{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
+</style>
+</head>
+<body>
+<div class="auth">
+
+  <!-- ================= FORM ================= -->
+  <div class="auth__form">
+    <div class="auth__top">
+      <a class="brand" href="../index.html" aria-label="LMS-CAT, kembali ke beranda">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">LMS<i>·</i>CAT</span>
+      </a>
+      <a class="back" href="../index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Beranda
+      </a>
+    </div>
+
+    <div class="auth__body">
+      <div>
+        <span class="eyebrow">Akun peserta</span>
+        <h1>Masuk untuk melanjutkan.</h1>
+        <p class="auth__sub">Hasil tryout, analisis materi, dan rencana latihanmu tersimpan di satu tempat.</p>
+      </div>
+
+      <div class="alert alert--error" id="formAlert" role="alert" hidden>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7.5v5M12 16v.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span id="formAlertText">Email atau kata sandi tidak cocok. Periksa kembali.</span>
+      </div>
+      <div class="alert alert--ok" id="formOk" role="status" hidden>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.7 2.7 5.3-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Berhasil masuk. Mengalihkan ke beranda akun…</span>
+      </div>
+
+      <form class="form" id="loginForm" novalidate>
+        <div class="field" id="f-email">
+          <label class="label" for="email">Email</label>
+          <input class="input" type="email" id="email" name="email" inputmode="email" autocomplete="email" placeholder="nama@email.com" aria-describedby="err-email" required>
+          <p class="msg msg--error" id="err-email" hidden>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 11v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span>Masukkan alamat email yang valid.</span>
+          </p>
+        </div>
+
+        <div class="field" id="f-password">
+          <label class="label" for="password">Kata sandi</label>
+          <div class="input-group">
+            <input class="input" type="password" id="password" name="password" autocomplete="current-password" placeholder="Masukkan kata sandi" aria-describedby="err-password" required>
+            <button class="input-action" type="button" id="pwToggle" aria-label="Tampilkan kata sandi" aria-pressed="false">
+              <svg id="eyeOn" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-6.4 10-6.4S22 12 22 12s-3.6 6.4-10 6.4S2 12 2 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.8" stroke="currentColor" stroke-width="1.8"/></svg>
+              <svg id="eyeOff" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden><path d="M3 12s3.6-6.4 9-6.4c1.5 0 2.9.6 4.1 1.4M21 12s-3.6 6.4-9 6.4c-1.5 0-2.9-.6-4.1-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <p class="msg msg--error" id="err-password" hidden>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 11v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span>Kata sandi minimal 8 karakter.</span>
+          </p>
+        </div>
+
+        <div class="form__row">
+          <label class="check">
+            <input type="checkbox" name="remember" id="remember">
+            <span>Ingat saya</span>
+          </label>
+          <a class="form__link" href="#">Lupa kata sandi?</a>
+        </div>
+
+        <button class="btn btn--block" type="submit" id="submitBtn">Masuk</button>
+
+        <p class="hint" style="text-align:center">
+          Dengan masuk, kamu menyetujui
+          <a href="#" style="color:var(--body);text-decoration:underline;text-underline-offset:2px">Syarat &amp; Ketentuan</a>
+          dan
+          <a href="#" style="color:var(--body);text-decoration:underline;text-underline-offset:2px">Kebijakan Privasi</a>.
+        </p>
+      </form>
+
+      <p class="auth__alt">Belum punya akun? <a href="../daftar/index.html">Daftar gratis</a></p>
+
+      <div class="auth__foot">
+        <span>© 2026 LMS-CAT</span>
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VISUAL ================= -->
+  <aside class="auth__visual" aria-hidden="true">
+    <div class="vis__top"><i></i> Analisis hasil tryout</div>
+
+    <div class="vis__mid">
+      <h2>Satu tryout tidak berarti apa-apa. Cara membacanya yang menentukan.</h2>
+      <p>Setiap kali kamu masuk, kamu melanjutkan percakapan dengan datamu sendiri: materi mana yang membaik, dan mana yang masih menahan.</p>
+
+      <div class="vcard">
+        <div class="vcard__head">
+          <span class="vcard__id">Progres · 4 simulasi</span>
+          <span class="badge badge--gold">+38</span>
+        </div>
+        <div class="vrow"><span>TWK</span><span class="vbar"><i class="b2" style="width:63%"></i></span><span>95</span></div>
+        <div class="vrow"><span>TIU</span><span class="vbar"><i style="width:64%"></i></span><span>112</span></div>
+        <div class="vrow"><span>TKP</span><span class="vbar"><i class="b3" style="width:91%"></i></span><span>205</span></div>
+      </div>
+    </div>
+
+    <div class="vis__bottom">
+      <div class="vpoint">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Peta materi dan pola kesalahan tersimpan per simulasi</span>
+      </div>
+      <div class="vpoint">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Jejak waktu per soal untuk memperbaiki tempo</span>
+      </div>
+      <div class="vpoint">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Rencana latihan yang diperbarui setiap tryout</span>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script src="../assets/js/store.js"></script>
+<script>
+(function () {
+  "use strict";
+  var form = document.getElementById("loginForm");
+  var email = document.getElementById("email");
+  var password = document.getElementById("password");
+  var fEmail = document.getElementById("f-email");
+  var fPass = document.getElementById("f-password");
+  var eEmail = document.getElementById("err-email");
+  var ePass = document.getElementById("err-password");
+  var alertBox = document.getElementById("formAlert");
+  var okBox = document.getElementById("formOk");
+  var submitBtn = document.getElementById("submitBtn");
+  var toggle = document.getElementById("pwToggle");
+  var eyeOn = document.getElementById("eyeOn");
+  var eyeOff = document.getElementById("eyeOff");
+
+  toggle.addEventListener("click", function () {
+    var shown = password.type === "text";
+    password.type = shown ? "password" : "text";
+    toggle.setAttribute("aria-pressed", String(!shown));
+    toggle.setAttribute("aria-label", shown ? "Tampilkan kata sandi" : "Sembunyikan kata sandi");
+    eyeOn.hidden = !shown; eyeOff.hidden = shown; password.focus();
+  });
+
+  function setError(field, errEl, on, message) {
+    field.classList.toggle("field--error", on);
+    errEl.hidden = !on;
+    field.querySelector(".input").setAttribute("aria-invalid", String(on));
+    if (message) errEl.querySelector("span").textContent = message;
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+  function validate(show) {
+    var ok = true;
+    if (!validEmail(email.value.trim())) {
+      ok = false;
+      if (show) setError(fEmail, eEmail, true, email.value.trim() === "" ? "Email belum diisi." : "Format email belum benar. Contoh: nama@email.com");
+    } else setError(fEmail, eEmail, false);
+    if (password.value.length < 8) {
+      ok = false;
+      if (show) setError(fPass, ePass, true, password.value === "" ? "Kata sandi belum diisi." : "Kata sandi minimal 8 karakter.");
+    } else setError(fPass, ePass, false);
+    return ok;
+  }
+
+  email.addEventListener("blur", function () { if (email.value) validate(true); });
+  password.addEventListener("blur", function () { if (password.value) validate(true); });
+  email.addEventListener("input", function () { if (fEmail.classList.contains("field--error")) validate(true); });
+  password.addEventListener("input", function () { if (fPass.classList.contains("field--error")) validate(true); });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    alertBox.hidden = true;
+    if (!validate(true)) {
+      var first = form.querySelector(".field--error .input");
+      if (first) first.focus();
+      return;
+    }
+    submitBtn.classList.add("is-loading");
+    submitBtn.disabled = true;
+    submitBtn.setAttribute("aria-busy", "true");
+    setTimeout(function () {
+      var emailValue = email.value.trim();
+      window.LMSStore.setUser({
+        name: emailValue.split("@")[0].replace(/[._-]+/g, " "),
+        email: emailValue
+      });
+      okBox.hidden = false;
+      setTimeout(function () { window.location.href = "../ujian/index.html"; }, 700);
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>

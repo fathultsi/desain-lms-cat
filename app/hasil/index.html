@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hasil &amp; Analisis · LMS-CAT</title>
+<meta name="theme-color" content="#061A2F">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/tokens.css">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+body{background:var(--cream)}
+
+.rhead{background:var(--navy-900);color:var(--text-invert)}
+.rhead__in{display:flex;align-items:center;gap:16px;height:64px}
+.rhead .brand__name{color:#fff}
+.rhead .brand__name i{color:var(--gold-400)}
+.rhead__right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.ruser{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:#C6D8E9}
+.ruser b{display:block;font-size:13px;color:#fff;line-height:1.2}
+.ruser span{display:block;font-size:11px;color:#8FA6BC;font-weight:600}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;font-size:11px;font-weight:800}
+
+.wrap2{width:100%;max-width:1080px;margin-inline:auto;padding:0 20px}
+
+/* hero skor */
+.scorehero{padding-block:clamp(28px,4vw,44px) 0}
+.scorehero__top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.scorehero h1{font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;margin-top:12px}
+.scorehero p{color:var(--body);font-size:14.5px;margin-top:8px}
+
+.scorecard{
+  margin-top:22px;background:linear-gradient(160deg,var(--navy-800),var(--navy-950));
+  border-radius:var(--r-lg);padding:clamp(22px,3vw,30px);color:#E8F1FA;
+  box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,40px);align-items:center;
+}
+.scorecard::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(245,183,0,.28),transparent 68%);top:-140px;right:-90px}
+.scorecard > *{position:relative}
+.ring{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;flex:none;background:conic-gradient(var(--gold-500) 0 0%,rgba(255,255,255,.13) 0%)}
+.ring__in{width:100px;height:100px;border-radius:50%;background:#0A2138;display:grid;place-content:center;text-align:center}
+.ring__in b{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.ring__in span{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8FA6BC;margin-top:4px}
+.smeta{min-width:0}
+.smeta .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8FA6BC}
+.smeta .big{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.smeta .big em{font-style:normal;font-size:1.5rem;font-weight:800;color:var(--gold-400);font-variant-numeric:tabular-nums}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
+.sbox{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:10px 6px;text-align:center}
+.sbox b{display:block;font-size:17px;font-weight:800;color:#fff;line-height:1.1;font-variant-numeric:tabular-nums}
+.sbox span{display:block;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9FB6CB;margin-top:5px}
+
+/* kartu */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-sm);padding:clamp(18px,2.4vw,24px)}
+.card__h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.card__t{font-size:14px;font-weight:800;color:var(--ink)}
+.card__s{font-size:11.5px;font-weight:700;color:var(--muted)}
+
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px;align-items:start}
+.stack{display:grid;gap:16px}
+
+/* bar kategori */
+.mrow{padding-block:10px;border-bottom:1px dashed var(--line)}
+.mrow:last-child{border-bottom:0}
+.mrow__top{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.mrow__top em{font-style:normal;font-size:12px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.mtrack{height:9px;border-radius:99px;background:var(--dv-track);overflow:hidden}
+.mtrack i{display:block;height:100%;border-radius:99px;transition:width .6s var(--ease)}
+
+/* heatmap */
+.heat{display:grid;grid-template-columns:repeat(15,1fr);gap:5px}
+.heat i{aspect-ratio:1;border-radius:4px;background:var(--line);display:block}
+.heat i.ok{background:var(--green-500)}
+.heat i.bad{background:var(--red-500)}
+.heat i.empty{background:#DCE3EC}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11px;font-weight:700;color:var(--body)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:block}
+
+/* trace */
+.trace{display:flex;align-items:flex-end;gap:3px;height:84px}
+.trace i{flex:1;min-width:3px;border-radius:3px 3px 0 0;background:#CFE0F0;display:block}
+.trace i.hot{background:var(--gold-500)}
+.trace i.crit{background:var(--red-500)}
+.axis{display:flex;justify-content:space-between;margin-top:7px;font-size:10px;font-weight:700;color:var(--muted)}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.mini div{background:var(--cream);border-radius:var(--r-sm);padding:10px 8px;text-align:center}
+.mini b{display:block;font-size:17px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.mini span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* slow list */
+.slowrow{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line)}
+.slowrow:last-child{border-bottom:0}
+.slowrow__no{width:32px;height:32px;border-radius:9px;background:var(--cream);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--body)}
+.slowrow__t{font-size:13px;font-weight:800;color:var(--ink)}
+.slowrow__s{font-size:11.5px;color:var(--muted);margin-top:1px}
+.slowrow__v{font-size:13px;font-weight:800;color:var(--red-600);font-variant-numeric:tabular-nums}
+
+/* rekomendasi */
+.reccard{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:9px}
+.reccard.first{border-color:var(--gold-500);box-shadow:0 6px 18px rgba(245,183,0,.18)}
+.reccard__n{width:30px;height:30px;border-radius:9px;background:var(--cream);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--body)}
+.reccard.first .reccard__n{background:var(--gold-500);color:var(--brand-fg)}
+.reccard__t{font-size:13.5px;font-weight:800;color:var(--ink)}
+.reccard__s{font-size:11.5px;color:var(--muted);margin-top:2px}
+.reccard__go{font-size:11px;font-weight:800;color:var(--navy-700);white-space:nowrap}
+
+.insight{border-left:3px solid var(--gold-500);padding:2px 0 2px 14px;margin-bottom:14px}
+.insight:last-child{margin-bottom:0}
+.insight .k{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-600)}
+.insight p{font-size:13.5px;line-height:1.6;color:var(--body);margin-top:5px}
+.insight strong{color:var(--ink);font-weight:800}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;margin-bottom:44px}
+.empty{max-width:520px;margin:60px auto;text-align:center;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:40px 28px;box-shadow:var(--shadow-sm)}
+.empty h2{font-size:1.25rem;margin-top:14px}
+.empty p{margin-top:10px;color:var(--body);font-size:14.5px;line-height:1.6}
+.empty .btn{margin-top:22px}
+
+@media (max-width:860px){
+  .grid2{grid-template-columns:1fr}
+  .scorecard{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .sgrid{grid-template-columns:repeat(2,1fr);width:100%}
+  .heat{grid-template-columns:repeat(10,1fr)}
+  .ruser span{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="rhead">
+  <div class="wrap2 rhead__in">
+    <a class="brand" href="../index.html" aria-label="LMS-CAT">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">LMS<i>·</i>CAT</span>
+    </a>
+    <div class="rhead__right">
+      <div class="ruser">
+        <div class="avatar" id="avatar" aria-hidden="true">NP</div>
+        <div><b id="userName">Peserta</b><span id="attemptDate">—</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap2">
+
+  <!-- belum ada percobaan -->
+  <div class="empty" id="emptyState" hidden>
+    <div style="width:56px;height:56px;margin-inline:auto;border-radius:50%;background:var(--gold-100);display:grid;place-items:center;color:var(--gold-600)">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 15l3.5-4 3 2.5L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Belum ada hasil untuk ditampilkan</h2>
+    <p>Kerjakan satu simulasi dulu. Analisis akan langsung tersedia setelah kamu menekan “Akhiri ujian”.</p>
+    <a class="btn" href="../ujian/index.html">Mulai simulasi</a>
+  </div>
+
+  <!-- hasil -->
+  <div id="resultBody">
+
+    <section class="scorehero">
+      <div class="scorehero__top">
+        <div>
+          <span class="eyebrow">Hasil simulasi</span>
+          <h1>Ini yang terjadi di tryout terakhirmu.</h1>
+          <p>Semua angka di halaman ini dihitung dari jawaban yang kamu pilih, bukan contoh.</p>
+        </div>
+      </div>
+
+      <div class="scorecard">
+        <div class="ring" id="scoreRing"><div class="ring__in"><b id="scoreNum">0</b><span id="scoreMax">dari 150</span></div></div>
+        <div class="smeta">
+          <div class="k">Skor TWK</div>
+          <div class="big"><em id="scorePct">0%</em><span style="font-size:12px;color:#8FA6BC">dari skor maksimum</span></div>
+          <div class="sgrid">
+            <div class="sbox"><b id="statCorrect">0</b><span>Benar</span></div>
+            <div class="sbox"><b id="statWrong">0</b><span>Salah</span></div>
+            <div class="sbox"><b id="statEmpty">0</b><span>Kosong</span></div>
+            <div class="sbox"><b id="statTime">00:00</b><span>Waktu</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid2">
+      <div class="stack">
+        <section class="card">
+          <div class="card__h">
+            <span class="card__t">Peta penguasaan materi</span>
+            <span class="card__s">TWK · 30 soal</span>
+          </div>
+          <div id="catBars"></div>
+        </section>
+
+        <section class="card">
+          <div class="card__h">
+            <span class="card__t">Sebaran jawaban per butir</span>
+            <span class="card__s">1 sel = 1 soal</span>
+          </div>
+          <div class="heat" id="heat"></div>
+          <div class="legend">
+            <span><i style="background:var(--green-500)"></i> Benar</span>
+            <span><i style="background:var(--red-500)"></i> Salah</span>
+            <span><i style="background:#DCE3EC"></i> Tidak dijawab</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card__h">
+            <span class="card__t">Jejak waktu per soal</span>
+            <span class="card__s">detik</span>
+          </div>
+          <div class="trace" id="trace"></div>
+          <div class="axis"><span>Soal 1</span><span>Soal 30</span></div>
+          <div class="mini">
+            <div><b id="avgTime">0</b><span>Rata-rata (dtk)</span></div>
+            <div><b id="over90">0</b><span>Soal &gt; 90 dtk</span></div>
+            <div><b id="slowestTime">—</b><span>Terlama</span></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="card">
+          <div class="card__h">
+            <span class="card__t">Rekomendasi berikutnya</span>
+          </div>
+          <div id="recList"></div>
+          <p style="font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5">
+            Diurutkan dari penguasaan terendah. Jumlah soal adalah saran awal, bukan target nilai.
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="card__h"><span class="card__t">Soal paling menyita waktu</span></div>
+          <div id="slowList"></div>
+        </section>
+
+        <section class="card">
+          <div class="card__h"><span class="card__t">Catatan analisis</span></div>
+          <div class="insight">
+            <div class="k">Materi terkuat</div>
+            <p><strong id="insightStrong">—</strong></p>
+          </div>
+          <div class="insight">
+            <div class="k">Materi paling lemah</div>
+            <p><strong id="insightWeak">—</strong></p>
+          </div>
+          <div class="insight">
+            <div class="k">Tempo pengerjaan</div>
+            <p id="insightTime">—</p>
+          </div>
+          <div class="insight">
+            <div class="k">Jawaban kosong</div>
+            <p id="insightEmpty">—</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" type="button" id="retryBtn">Ulangi simulasi</button>
+      <a class="btn btn--outline" href="../index.html">Kembali ke beranda</a>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/store.js"></script>
+<script src="../assets/js/exam-data.js"></script>
+<script src="../assets/js/result.js"></script>
+<script>
+(function () {
+  var u = window.LMSStore.getUser();
+  var av = document.getElementById("avatar");
+  if (u && av) av.textContent = window.LMSStore.initials(u.name);
+})();
+</script>
+</body>
+</html>

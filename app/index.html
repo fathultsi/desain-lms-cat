@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LMS-CAT — Analisis Tryout SKD CPNS 2027: Tahu Penyebab Nilaimu Mandek</title>
+<meta name="description" content="LMS-CAT membedah hasil tryout per materi dan per detik waktu pengerjaan, lalu menyusun prioritas latihan untuk SKD CPNS 2027.">
+<meta name="theme-color" content="#061A2F">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+/* ============================== TOPBAR ============================== */
+.topbar{
+  background:var(--navy-950); color:#DCE8F5;
+  font-size:13px; font-weight:600; padding:9px 0;
+}
+.topbar .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center}
+.topbar b{color:var(--gold-400)}
+.topbar .dot{background:var(--gold-500);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ============================== HEADER ============================== */
+.site-header{
+  position:sticky; top:0; z-index:var(--z-sticky);
+  background:var(--navy-900);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:box-shadow var(--dur-2) var(--ease);
+}
+.site-header.is-stuck{box-shadow:0 12px 30px rgba(3,12,22,.45)}
+.hdr{display:flex;align-items:center;gap:26px;height:68px}
+.brand{display:inline-flex;align-items:center;gap:10px;flex:none}
+.brand__mark{
+  width:32px;height:32px;border-radius:10px;flex:none;
+  background:var(--gold-500);display:grid;place-items:center;
+  box-shadow:0 4px 12px rgba(245,183,0,.35);
+}
+.brand__mark::after{content:"";width:10px;height:10px;border-radius:50%;background:#231A00}
+.brand__name{font-weight:800;font-size:16px;letter-spacing:-.02em;color:#fff}
+.brand__name i{color:var(--gold-400);font-style:normal}
+
+.hdr__links{display:flex;gap:4px;margin-left:6px}
+.hdr__links a{
+  font-size:14px;font-weight:600;color:#A9C0D4;padding:8px 12px;border-radius:var(--r-pill);
+  transition:color var(--dur-1), background var(--dur-1);
+}
+.hdr__links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.hdr__actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.hdr__actions .btn--ghost{padding:11px 18px;font-size:14px;border-color:rgba(255,255,255,.24)}
+.burger{display:none;width:44px;height:44px;margin-left:auto;place-items:center;border-radius:12px;border:1px solid rgba(255,255,255,.2);color:#fff}
+.burger span{display:block;width:18px;height:2px;background:currentColor;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;transition:transform var(--dur-2) var(--ease)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.mmenu{border-top:1px solid rgba(255,255,255,.1);padding:12px 20px 20px;background:var(--navy-900)}
+.mmenu a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-weight:700;color:#E8F1FA}
+.mmenu .mm-act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+@media (max-width:960px){
+  .hdr__links,.hdr__actions{display:none}
+  .burger{display:grid}
+}
+
+/* ============================== HERO ============================== */
+.hero{padding:clamp(34px,5vw,58px) 0 clamp(44px,6vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4.4vw,52px);align-items:center}
+.hero h1{margin-top:18px;color:#fff}
+.hero .sub{font-size:var(--text-lead);color:#C6D8E9;margin-top:16px;max-width:34em;line-height:1.7}
+.hero .sub strong{color:#fff;font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center}
+.trust{
+  display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:28px;padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.12);font-size:13.5px;color:#A9C0D4;font-weight:600;
+}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+.ck{width:17px;height:17px;flex:none;color:var(--gold-500)}
+
+/* kartu hasil */
+.rcard{
+  position:relative;border-radius:var(--r-lg);padding:22px;
+  background:linear-gradient(180deg,rgba(12,38,63,.92),rgba(5,22,40,.9));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 30px 70px -30px rgba(3,12,22,.85), inset 0 1px 0 rgba(255,255,255,.1);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.rcard__top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.rcard__id{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8FA6BC}
+.rcard__badge{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;background:rgba(245,183,0,.12);border:1px solid rgba(245,183,0,.34);color:var(--gold-400)}
+.rscore{display:flex;align-items:center;gap:16px;padding-block:18px}
+.rring{position:relative;width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--gold-500) 0 75%,rgba(255,255,255,.13) 75%);display:grid;place-items:center;flex:none}
+.rring__in{width:68px;height:68px;border-radius:50%;background:#0A2138;display:grid;place-content:center;text-align:center}
+.rring__in b{font-size:23px;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.rring__in span{font-size:8px;font-weight:800;letter-spacing:.12em;color:#8FA6BC;margin-top:3px}
+.rmeta{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8FA6BC}
+.rdelta{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:4px 9px;border-radius:7px;background:rgba(74,222,155,.15);color:#4ADE9B;font-size:12px;font-weight:800}
+.rboxes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+.rbox{
+  border-radius:12px;padding:11px 4px;text-align:center;
+  background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.13);
+}
+.rbox b{display:block;font-size:17px;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.rbox span{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;color:#9FB6CB;margin-top:6px}
+.rchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
+.rchip{font-size:11px;font-weight:800;padding:5px 9px;border-radius:7px;background:rgba(245,183,0,.14);color:var(--gold-400)}
+.rchip b{color:#FFE9A8}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero .sub{max-width:none}
+}
+
+/* ============================== PAIN ============================== */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pain{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);padding:26px 22px;box-shadow:var(--shadow-sm)}
+.pain .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold-100);color:var(--gold-600);margin-bottom:16px}
+.pain h3{font-size:var(--text-md);margin-bottom:8px}
+.pain p{font-size:14.5px;color:var(--body);line-height:1.65}
+.quote{
+  margin-top:28px;background:var(--white);border-left:4px solid var(--gold-500);
+  border-radius:0 var(--r-md) var(--r-md) 0;padding:22px 24px;box-shadow:var(--shadow-sm);
+  font-size:1.02rem;color:var(--ink);font-weight:700;line-height:1.55;
+}
+.quote small{display:block;margin-top:8px;font-weight:500;font-size:13.5px;color:var(--muted)}
+
+/* ============================== SOLUTION ============================== */
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,52px);align-items:center}
+.pillars{display:grid;gap:16px;margin-top:26px}
+.pillar{display:flex;gap:14px;align-items:flex-start}
+.pillar .n{
+  flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
+  background:var(--navy-900);color:var(--gold-400);font-weight:800;font-size:14px;
+}
+.pillar b{display:block;color:var(--ink);font-size:var(--text-md);font-weight:800}
+.pillar span{font-size:14px;color:var(--body);line-height:1.6}
+
+.mock{
+  border-radius:var(--r-lg);padding:clamp(24px,3vw,34px);position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--navy-800),var(--navy-950));
+  box-shadow:var(--shadow-lg);color:#E8F1FA;
+}
+.mock::before{
+  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,183,0,.30),transparent 68%);
+  top:-90px;right:-70px;
+}
+.mock .tag{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:#231A00;background:var(--gold-500);padding:6px 11px;border-radius:6px;
+}
+.mock h3{color:#fff;font-size:var(--text-lg);margin:16px 0 4px;position:relative}
+.mock .ms{color:#A9C0D4;font-size:13.5px}
+.mrows{margin-top:22px;display:grid;gap:12px;position:relative}
+.mrow{display:grid;grid-template-columns:46px 1fr 34px;gap:10px;align-items:center}
+.mrow span{font-size:11px;font-weight:800;color:#9FB6CB;letter-spacing:.06em}
+.mrow em{font-style:normal;font-size:11.5px;font-weight:800;color:#fff;text-align:right;font-variant-numeric:tabular-nums}
+.mtrack{height:7px;border-radius:99px;background:rgba(255,255,255,.13);overflow:hidden}
+.mtrack i{display:block;height:100%;border-radius:99px;background:var(--gold-500)}
+.mtrack i.b2{background:#7FB4E8}
+.mtrack i.b3{background:#4ADE9B}
+.mfoot{
+  margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;flex-wrap:wrap;
+}
+.mfoot span{font-size:12.5px;color:#9FB6CB;font-weight:600}
+.mfoot b{color:var(--gold-400);font-size:13.5px;font-weight:800}
+
+/* ============================== FEATURES (navy) ============================== */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat{
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-md);padding:26px 24px;
+  transition:transform var(--dur-2) var(--ease), border-color var(--dur-2), background var(--dur-2);
+}
+.feat:hover{transform:translateY(-3px);border-color:rgba(245,183,0,.45);background:rgba(255,255,255,.07)}
+.feat .ic{
+  width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+  background:rgba(245,183,0,.14);color:var(--gold-400);border:1px solid rgba(245,183,0,.26);
+}
+.feat h3{color:#fff;font-size:var(--text-md);margin-bottom:8px}
+.feat p{font-size:14.3px;color:#AFC4D6;line-height:1.65}
+
+/* ============================== PREVIEW / TABS ============================== */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+.tab{
+  padding:11px 20px;border-radius:var(--r-pill);border:1.5px solid var(--line-strong);
+  background:var(--white);font-size:14px;font-weight:800;color:var(--body);
+  transition:all var(--dur-1) var(--ease);
+}
+.tab:hover{border-color:var(--navy-700);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--navy-900);border-color:var(--navy-900);color:#fff}
+.tabpanel[hidden]{display:none}
+.pv-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:start}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+.panel__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line-soft)}
+.panel__title{font-size:13px;font-weight:800;color:var(--ink)}
+.panel__body{padding:20px}
+.prow{display:grid;grid-template-columns:1fr 56px;gap:6px 12px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line)}
+.prow:last-of-type{border-bottom:0}
+.prow__n{font-size:13.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px}
+.prow__v{font-size:12px;font-weight:800;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.pbar{grid-column:1/-1;height:8px;border-radius:99px;background:var(--dv-track);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:99px;background:var(--gold-500)}
+.tag{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:4px}
+.tag--bad{background:var(--red-100);color:var(--red-600)}
+.tag--mid{background:var(--amber-100);color:var(--amber-600)}
+.tag--good{background:var(--green-100);color:var(--green-600)}
+
+.heat{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}
+.heat i{height:12px;border-radius:3px;background:var(--dv-track)}
+.heat i[data-l="1"]{background:#F5C2BE}
+.heat i[data-l="2"]{background:#FAD9A6}
+.heat i[data-l="3"]{background:#F7E39A}
+.heat i[data-l="4"]{background:#A9DCBE}
+.heat i[data-l="5"]{background:#0F9D58}
+.heat__lg{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:11px;color:var(--muted);font-weight:700}
+.heat__lg .sc{display:flex;gap:2px}
+.heat__lg .sc i{width:14px;height:9px;border-radius:2px}
+
+.side{display:grid;gap:12px}
+.insight{padding:18px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--white);box-shadow:var(--shadow-sm)}
+.insight__k{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-600)}
+.insight p{font-size:14px;line-height:1.6;color:var(--body);margin-top:8px}
+.insight strong{color:var(--ink);font-weight:800}
+
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.stat{padding:12px 10px;background:var(--cream);border-radius:var(--r-sm);text-align:center}
+.stat b{display:block;font-size:19px;font-weight:800;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+.trace{display:flex;align-items:flex-end;gap:3px;height:96px;margin-top:6px}
+.trace i{flex:1;min-width:3px;background:#CFE0F0;border-radius:3px 3px 0 0}
+.trace i.hot{background:var(--gold-500)}
+.trace i.crit{background:var(--red-500)}
+.axis{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;font-weight:700;color:var(--muted)}
+
+.plan{display:grid;gap:9px}
+.plan__item{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--white)}
+.plan__item.first{border-color:var(--gold-500);box-shadow:0 6px 18px rgba(245,183,0,.18)}
+.plan__n{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--cream);font-size:12px;font-weight:800;color:var(--body)}
+.plan__item.first .plan__n{background:var(--gold-500);color:var(--brand-fg)}
+.plan__t{font-size:13.5px;font-weight:800;color:var(--ink)}
+.plan__s{font-size:11.5px;color:var(--muted);margin-top:2px}
+.plan__go{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--navy-700)}
+
+@media (max-width:900px){.pv-grid{grid-template-columns:1fr}}
+
+/* ============================== FIT ============================== */
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fit{border-radius:var(--r-lg);padding:30px 28px;border:1px solid var(--line);background:var(--white);box-shadow:var(--shadow-sm)}
+.fit--yes{border-color:rgba(15,157,88,.3);background:linear-gradient(180deg,#F2FBF6,#fff)}
+.fit--no{border-color:#E8EBEF;background:#FAFBFC}
+.fit h3{font-size:var(--text-lg);display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.fit .sub{font-size:14px;color:var(--muted);margin-bottom:18px}
+.fit ul{display:grid;gap:12px}
+.fit li{display:flex;gap:11px;align-items:flex-start;font-size:14.8px;color:var(--ink);line-height:1.55}
+.fit .mini{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;flex:none;margin-top:2px;font-size:11px;font-weight:800}
+.fit--yes .mini{background:rgba(15,157,88,.14);color:var(--green-500)}
+.fit--no .mini{background:rgba(214,69,69,.12);color:var(--red-500)}
+
+/* ============================== STEPS ============================== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;box-shadow:var(--shadow-sm)}
+.step__n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--navy-900);color:var(--gold-400);font-size:12px;font-weight:800;margin-bottom:12px}
+.step h3{font-size:var(--text-md);margin-bottom:6px}
+.step p{font-size:13.8px;color:var(--body);line-height:1.6}
+
+/* ============================== PROGRAM ============================== */
+.prog{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pcard{border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;background:var(--white);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
+.pcard.live{border-color:rgba(245,183,0,.55);box-shadow:0 14px 34px rgba(245,183,0,.13)}
+.pcard h3{font-size:var(--text-lg)}
+.pcard p{font-size:14px;color:var(--body);line-height:1.6}
+.pcard__foot{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* ============================== PRICING ============================== */
+.notice{
+  display:flex;gap:10px;align-items:flex-start;padding:14px 18px;margin-bottom:28px;
+  background:var(--gold-100);border:1px solid rgba(245,183,0,.45);border-radius:var(--r-sm);
+  font-size:13.5px;color:#6B4A00;line-height:1.55;
+}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.tier{border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 24px;background:var(--white);box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.tier--pop{background:linear-gradient(165deg,var(--navy-800),var(--navy-950));border-color:var(--navy-800);color:var(--text-invert);box-shadow:var(--shadow-lg)}
+.tier--pop h3{color:#fff}
+.tier--pop .tier__d{color:#A9C0D4}
+.tier--pop .tier__price{color:#fff}
+.tier--pop .tier__note{color:#8FA6BC}
+.tier--pop .tier__feat{border-top-color:rgba(255,255,255,.14)}
+.tier--pop .tier__feat li{color:#C6D8E9}
+.tier__top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tier h3{font-size:var(--text-lg)}
+.tier__d{font-size:13.5px;color:var(--body);margin-top:6px;min-height:40px;line-height:1.55}
+.tier__price{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-top:18px;display:flex;align-items:baseline;gap:6px;color:var(--ink)}
+.tier__price span{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+.tier__note{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.tier__feat{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:grid;gap:10px}
+.tier__feat li{display:flex;gap:9px;font-size:13.8px;color:var(--body);line-height:1.5}
+.tier__feat li svg{flex:none;margin-top:2px}
+.tier__feat li.off{color:var(--muted);opacity:.7}
+.tier .btn{margin-top:22px;width:100%;font-size:15px;padding:15px 20px}
+
+/* ============================== FAQ ============================== */
+.faq{max-width:var(--wrap-narrow);margin-inline:auto;display:grid;gap:12px}
+.faq details{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-sm);overflow:hidden;transition:border-color var(--dur-1)}
+.faq details[open]{border-color:rgba(245,183,0,.55)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 56px 20px 22px;position:relative;
+  font-weight:800;color:var(--ink);font-size:15.5px;line-height:1.5;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:9px;background:var(--cream);color:var(--navy-800);
+  display:grid;place-items:center;font-weight:800;font-size:17px;line-height:1;transition:var(--dur-1);
+}
+.faq details[open] summary::after{content:"–";background:var(--gold-500);color:var(--brand-fg)}
+.faq__a{padding:0 22px 22px;font-size:14.8px;color:var(--body);line-height:1.7}
+.faq__a p+p{margin-top:10px}
+
+/* ============================== FINAL CTA ============================== */
+.final{text-align:center;padding-block:clamp(64px,8vw,104px)}
+.final h2{max-width:20em;margin-inline:auto}
+.final p{max-width:38em;margin:18px auto 0;font-size:1.05rem}
+.final .btn{margin-top:30px}
+.final .micro{font-size:13px;color:#AFC1D2;margin-top:16px}
+
+/* ============================== FOOTER ============================== */
+.footer{background:var(--navy-950);color:#8FA6BC;padding:44px 0 40px;font-size:13.5px}
+.foot-grid{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.foot-grid b{color:#fff;font-size:15px;display:block;margin-bottom:8px}
+.footer p{max-width:52em;margin-top:10px;line-height:1.75;font-size:13px;color:#A6B8C9}
+.footer a{color:#B9CCDD}
+.footer a:hover{color:var(--gold-400)}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap;font-size:13px}
+.foot-bottom{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#7E96AC}
+
+/* ============================== FLOATING CTA ============================== */
+.fcta{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;
+  background:rgba(6,26,47,.97);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.14);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 30px rgba(4,18,31,.35);
+  transform:translateY(110%);visibility:hidden;transition:transform var(--dur-2) var(--ease), visibility var(--dur-2);
+}
+.fcta.show{transform:none;visibility:visible}
+.fcta__in{display:flex;align-items:center;gap:12px;max-width:var(--wrap);margin-inline:auto}
+.fcta__price{flex:none;line-height:1.25}
+.fcta__price .now{display:block;color:#fff;font-weight:800;font-size:1.02rem}
+.fcta__price .was{display:block;color:#AFC2D4;font-size:11.5px}
+.fcta .btn{flex:1;padding:15px 18px;font-size:15.5px;box-shadow:none}
+
+@media (max-width:960px){
+  .pain-grid,.feat-grid,.prog,.steps,.tiers{grid-template-columns:1fr 1fr}
+  .solution{grid-template-columns:1fr;gap:32px}
+  .fit-grid{grid-template-columns:1fr}
+  .rbox b{font-size:15px}
+}
+@media (max-width:700px){
+  .pain-grid,.feat-grid,.prog,.steps,.tiers{grid-template-columns:1fr}
+  .fcta{display:block}
+  .footer{padding-bottom:104px}
+  .hero-cta .btn{width:100%}
+  .trust{font-size:12.5px;gap:10px 16px}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+<!-- ============================ TOPBAR ============================ -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Analisis materi &amp; jejak waktu tersedia di setiap simulasi <b>·</b> Program <b>SKD CPNS 2027</b></span>
+  </div>
+</div>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap hdr">
+    <a class="brand" href="#atas" aria-label="LMS-CAT, kembali ke atas">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">LMS<i>·</i>CAT</span>
+    </a>
+    <nav class="hdr__links" aria-label="Navigasi utama">
+      <a href="#masalah">Masalah</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#analisis">Contoh analisis</a>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#paket">Paket</a>
+    </nav>
+    <div class="hdr__actions">
+      <a href="masuk/index.html" class="btn btn--ghost">Masuk</a>
+      <a href="daftar/index.html" class="btn btn--sm">Daftar</a>
+    </div>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mmenu" aria-label="Buka menu"><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu" hidden>
+    <a href="#masalah">Masalah</a>
+    <a href="#fitur">Fitur</a>
+    <a href="#analisis">Contoh analisis</a>
+    <a href="#cara-kerja">Cara Kerja</a>
+    <a href="#paket">Paket</a>
+    <div class="mm-act">
+      <a href="masuk/index.html" class="btn btn--ghost">Masuk</a>
+      <a href="daftar/index.html" class="btn">Daftar</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero on-navy glow" id="atas">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Platform analisis tryout · SKD CPNS 2027</span>
+      <h1 class="display">Nilai tryout mandek.<br>Bukan karena <span class="hl">kurang soal</span>.</h1>
+      <p class="sub">
+        LMS-CAT membedah setiap jawaban dan setiap detik waktu pengerjaanmu, lalu menyusun prioritas belajar
+        yang jelas. <strong>Bukan sekadar skor di akhir tryout.</strong>
+      </p>
+      <div class="hero-cta">
+        <a href="daftar/index.html" class="btn">Mulai Tryout Gratis <span aria-hidden="true">→</span></a>
+        <a href="#analisis" class="btn btn--ghost">Lihat contoh analisis</a>
+      </div>
+      <div class="trust">
+        <span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Analisis per butir soal</span>
+        <span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Jejak waktu per soal</span>
+        <span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Riwayat progres</span>
+      </div>
+    </div>
+
+    <div class="rcard" role="img" aria-label="Contoh kartu hasil: skor 412, TWK 95, TIU 112, TKP 205, waktu 94 menit.">
+      <div class="rcard__top">
+        <span class="rcard__id">Simulasi #4 · SKD</span>
+        <span class="rcard__badge">Data ilustratif</span>
+      </div>
+      <div class="rscore">
+        <div class="rring"><div class="rring__in"><b>412</b><span>SKOR</span></div></div>
+        <div>
+          <div class="rmeta">Total</div>
+          <div class="rdelta">↑ +38 poin</div>
+        </div>
+      </div>
+      <div class="rboxes">
+        <div class="rbox"><b>95</b><span>TWK</span></div>
+        <div class="rbox"><b>112</b><span>TIU</span></div>
+        <div class="rbox"><b>205</b><span>TKP</span></div>
+        <div class="rbox"><b>94</b><span>MENIT</span></div>
+      </div>
+      <div class="rchips">
+        <span class="rchip">Deret angka <b>41%</b></span>
+        <span class="rchip">Silogisme <b>48%</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MASALAH ============================ -->
+<section class="sec sec--cream" id="masalah">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Kalau ini terasa familiar</span>
+      <h2 class="h2">Kamu sudah berusaha. Tapi usahanya belum ketemu arah.</h2>
+      <p class="lead">Bukan karena kamu malas. Kebanyakan peserta gagal menaikkan skor karena berlatih tanpa sistem — dan itu bisa diperbaiki.</p>
+    </div>
+
+    <div class="pain-grid">
+      <article class="pain" data-reveal>
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-7 4 4 5-7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h18" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Sudah tryout berkali-kali, nilai tetap</h3>
+        <p>Skor akhir tidak menunjukkan penyebabnya. Kamu tahu nilainya, tapi tidak tahu bagian mana yang menahan.</p>
+      </article>
+
+      <article class="pain" data-reveal style="--d:80ms">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Tidak tahu materi mana yang paling lemah</h3>
+        <p>Semua terasa kurang. Akhirnya belajar berpindah-pindah, dan tidak ada yang benar-benar selesai.</p>
+      </article>
+
+      <article class="pain" data-reveal style="--d:160ms">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Kehabisan waktu di soal terakhir</h3>
+        <p>Bukan karena tidak bisa, tapi karena waktu habis di soal yang seharusnya dilewati lebih dulu.</p>
+      </article>
+    </div>
+
+    <div class="quote" data-reveal>
+      “Bingung mau belajar apa dulu — karena semuanya terasa penting.”
+      <small>LMS-CAT mengurutkan prioritas berdasarkan dampaknya ke skor, bukan berdasarkan urutan bab di buku.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SOLUSI ============================ -->
+<section class="sec" id="solusi">
+  <div class="wrap solution">
+    <div data-reveal>
+      <span class="eyebrow">Yang membedakan</span>
+      <h2 class="h2" style="margin-top:14px">Bukan tryout biasa. Ini laporan diagnostik.</h2>
+      <p class="lead" style="margin-top:14px">
+        Setiap jawaban dipetakan ke kategori materi, dan setiap soal punya catatan waktu.
+        Hasilnya bukan satu angka, tapi tiga hal yang bisa langsung kamu kerjakan.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <span class="n">01</span>
+          <div><b>Peta materi</b><span>Kategori mana yang menahan skormu, dan seberapa besar pengaruhnya.</span></div>
+        </div>
+        <div class="pillar">
+          <span class="n">02</span>
+          <div><b>Jejak waktu</b><span>Soal mana yang menyita menitmu, dan di bagian mana tempo melambat.</span></div>
+        </div>
+        <div class="pillar">
+          <span class="n">03</span>
+          <div><b>Rencana latihan</b><span>Urutan materi, jumlah soal, dan target per sesi — siap dijalankan.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mock" data-reveal>
+      <span class="tag">Laporan analisis</span>
+      <h3>Simulasi #4 · SKD</h3>
+      <div class="ms">Ringkasan setelah 110 soal selesai</div>
+
+      <div class="mrows">
+        <div class="mrow"><span>TWK</span><div class="mtrack"><i style="width:63%"></i></div><em>95</em></div>
+        <div class="mrow"><span>TIU</span><div class="mtrack"><i class="b2" style="width:64%"></i></div><em>112</em></div>
+        <div class="mrow"><span>TKP</span><div class="mtrack"><i class="b3" style="width:91%"></i></div><em>205</em></div>
+      </div>
+
+      <div class="mfoot">
+        <span>Prioritas berikutnya</span>
+        <b>Deret angka · 45 soal</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FITUR (navy) ============================ -->
+<section class="sec on-navy glow" id="fitur">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Tiga hal yang tidak kamu dapat dari tryout biasa</span>
+      <h2 class="h2">Setiap fitur menjawab satu pertanyaan: besok belajar apa?</h2>
+    </div>
+
+    <div class="feat-grid">
+      <article class="feat" data-reveal>
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5m0 14h16" stroke-linecap="round"/><path d="M7 15l3.5-4 3 2.5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Peta penguasaan materi</h3>
+        <p>Penguasaan per kategori TWK, TIU, dan TKP — plus penanda tipe soal yang paling sering salah.</p>
+      </article>
+
+      <article class="feat" data-reveal style="--d:80ms">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Jejak waktu per soal</h3>
+        <p>Durasi setiap soal dicatat. Kamu bisa melihat soal mana yang menahan terlalu lama, dan kapan harus lanjut.</p>
+      </article>
+
+      <article class="feat" data-reveal style="--d:160ms">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 6h14M5 12h14M5 18h9" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Rencana latihan berurutan</h3>
+        <p>Rekomendasi datang sebagai rencana: materi apa, berapa soal, lalu setelah itu apa.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PREVIEW ANALISIS ============================ -->
+<section class="sec sec--cream" id="analisis">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Contoh analisis</span>
+      <h2 class="h2">Ini yang kamu lihat setelah menekan “Selesai”.</h2>
+      <p class="lead">Tiga lapis analisis: apa yang dikuasai, bagaimana waktumu dipakai, dan apa langkah berikutnya. Semua angka di bawah adalah data ilustratif.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Jenis analisis">
+      <button class="tab" role="tab" id="t-materi" aria-controls="p-materi" aria-selected="true">Analisis materi</button>
+      <button class="tab" role="tab" id="t-waktu" aria-controls="p-waktu" aria-selected="false" tabindex="-1">Manajemen waktu</button>
+      <button class="tab" role="tab" id="t-strategi" aria-controls="p-strategi" aria-selected="false" tabindex="-1">Strategi kelulusan</button>
+    </div>
+
+    <!-- materi -->
+    <div class="tabpanel" role="tabpanel" id="p-materi" aria-labelledby="t-materi">
+      <div class="pv-grid">
+        <div class="panel">
+          <div class="panel__head">
+            <span class="panel__title">Peta penguasaan · 110 soal</span>
+            <span class="badge badge--soft">Simulasi #4</span>
+          </div>
+          <div class="panel__body">
+            <div class="prow"><span class="prow__n">Bahasa negara</span><span class="prow__v">88%</span><span class="pbar"><i style="width:88%;background:var(--green-500)"></i></span></div>
+            <div class="prow"><span class="prow__n">Nasionalisme</span><span class="prow__v">84%</span><span class="pbar"><i style="width:84%;background:var(--green-500)"></i></span></div>
+            <div class="prow"><span class="prow__n">Integritas</span><span class="prow__v">71%</span><span class="pbar"><i style="width:71%"></i></span></div>
+            <div class="prow"><span class="prow__n">Bela negara <span class="tag tag--mid">Perlu latihan</span></span><span class="prow__v">52%</span><span class="pbar"><i style="width:52%;background:var(--amber-500)"></i></span></div>
+            <div class="prow"><span class="prow__n">Pilar negara <span class="tag tag--bad">Prioritas</span></span><span class="prow__v">47%</span><span class="pbar"><i style="width:47%;background:var(--red-500)"></i></span></div>
+
+            <div style="margin-top:20px">
+              <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Sebaran jawaban per butir</div>
+              <div class="heat" aria-hidden="true">
+                <i data-l="5"></i><i data-l="4"></i><i data-l="5"></i><i data-l="3"></i><i data-l="5"></i><i data-l="4"></i><i data-l="5"></i><i data-l="5"></i><i data-l="4"></i><i data-l="5"></i>
+                <i data-l="3"></i><i data-l="2"></i><i data-l="4"></i><i data-l="5"></i><i data-l="1"></i><i data-l="3"></i><i data-l="4"></i><i data-l="2"></i><i data-l="4"></i><i data-l="5"></i>
+                <i data-l="5"></i><i data-l="4"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="5"></i><i data-l="4"></i><i data-l="5"></i><i data-l="3"></i><i data-l="2"></i>
+                <i data-l="2"></i><i data-l="1"></i><i data-l="2"></i><i data-l="4"></i><i data-l="5"></i><i data-l="3"></i><i data-l="1"></i><i data-l="2"></i><i data-l="4"></i><i data-l="5"></i>
+                <i data-l="4"></i><i data-l="3"></i><i data-l="2"></i><i data-l="1"></i><i data-l="2"></i><i data-l="4"></i><i data-l="3"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>
+                <i data-l="5"></i><i data-l="4"></i><i data-l="3"></i><i data-l="2"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i><i data-l="5"></i><i data-l="4"></i>
+              </div>
+              <div class="heat__lg">
+                <span>Lemah</span>
+                <span class="sc"><i style="background:#F5C2BE"></i><i style="background:#FAD9A6"></i><i style="background:#F7E39A"></i><i style="background:#A9DCBE"></i><i style="background:#0F9D58"></i></span>
+                <span>Kuat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="insight">
+            <div class="insight__k">Pola kesalahan</div>
+            <p><strong>7 dari 9</strong> kesalahan TIU terjadi pada soal berurutan panjang — bukan pada hitungan tunggal.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Yang perlu dilakukan</div>
+            <p>Latih <strong>deret angka</strong> dan <strong>silogisme</strong> lebih dulu. Keduanya menyumbang penurunan terbesar.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Catatan</div>
+            <p>Analisis bersifat diagnostik, bukan prediksi kelulusan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- waktu -->
+    <div class="tabpanel" role="tabpanel" id="p-waktu" aria-labelledby="t-waktu" hidden>
+      <div class="pv-grid">
+        <div class="panel">
+          <div class="panel__head">
+            <span class="panel__title">Waktu per bagian</span>
+            <span class="badge badge--soft">Total 94 menit</span>
+          </div>
+          <div class="panel__body">
+            <div class="prow"><span class="prow__n">TWK · 30 soal</span><span class="prow__v">21 mnt</span><span class="pbar"><i style="width:52%"></i></span></div>
+            <div class="prow"><span class="prow__n">TIU · 35 soal</span><span class="prow__v">41 mnt</span><span class="pbar"><i style="width:88%;background:var(--amber-500)"></i></span></div>
+            <div class="prow"><span class="prow__n">TKP · 45 soal</span><span class="prow__v">32 mnt</span><span class="pbar"><i style="width:70%;background:var(--green-500)"></i></span></div>
+
+            <div style="margin-top:20px">
+              <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Durasi 30 soal terakhir</div>
+              <div class="trace" aria-hidden="true">
+                <i style="height:30%"></i><i style="height:44%"></i><i style="height:26%"></i><i style="height:38%"></i>
+                <i style="height:52%"></i><i style="height:31%"></i><i style="height:47%"></i><i style="height:24%"></i>
+                <i style="height:58%"></i><i style="height:35%"></i><i style="height:41%"></i><i style="height:29%"></i>
+                <i class="hot" style="height:76%"></i><i style="height:33%"></i><i style="height:49%"></i><i style="height:27%"></i>
+                <i style="height:55%"></i><i style="height:39%"></i><i class="crit" style="height:100%"></i><i style="height:36%"></i>
+                <i style="height:22%"></i><i style="height:46%"></i><i style="height:32%"></i><i style="height:51%"></i>
+                <i style="height:28%"></i><i style="height:43%"></i><i style="height:37%"></i><i style="height:24%"></i>
+                <i style="height:48%"></i><i style="height:30%"></i>
+              </div>
+              <div class="axis"><span>Soal 81</span><span>Soal 110</span></div>
+            </div>
+
+            <div class="statrow">
+              <div class="stat"><b>48</b><span>Rata-rata (dtk)</span></div>
+              <div class="stat"><b style="color:var(--amber-600)">8</b><span>Soal &gt; 2 mnt</span></div>
+              <div class="stat"><b>6</b><span>Sisa (mnt)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="insight">
+            <div class="insight__k">Temuan utama</div>
+            <p>TIU memakai <strong>41 dari 100 menit</strong> untuk 35 soal — 70 detik per soal, di atas batas aman.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Soal yang menahan</div>
+            <p>Soal 18 (3:12) dan soal 27 (3:41) menyita <strong>6,9 menit</strong> dan keduanya salah.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Strategi disarankan</div>
+            <p>25 mnt TWK, 40 mnt TIU, 30 mnt TKP. Lewati soal yang melewati 90 detik.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- strategi -->
+    <div class="tabpanel" role="tabpanel" id="p-strategi" aria-labelledby="t-strategi" hidden>
+      <div class="pv-grid">
+        <div class="panel">
+          <div class="panel__head">
+            <span class="panel__title">Rencana persiapan · 4 minggu</span>
+            <span class="badge badge--soft">Draf</span>
+          </div>
+          <div class="panel__body">
+            <div class="plan">
+              <div class="plan__item first">
+                <span class="plan__n">1</span>
+                <div><div class="plan__t">Minggu 1 · Tutup kebocoran terbesar</div><div class="plan__s">Deret angka &amp; silogisme · 75 soal</div></div>
+                <span class="plan__go">45%</span>
+              </div>
+              <div class="plan__item">
+                <span class="plan__n">2</span>
+                <div><div class="plan__t">Minggu 2 · Perbaiki tempo</div><div class="plan__s">Latihan berwaktu · target 60 dtk/soal</div></div>
+                <span class="plan__go">—</span>
+              </div>
+              <div class="plan__item">
+                <span class="plan__n">3</span>
+                <div><div class="plan__t">Minggu 3–4 · Simulasi penuh</div><div class="plan__s">2 simulasi + evaluasi per materi</div></div>
+                <span class="plan__go">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="insight">
+            <div class="insight__k">Cara kami menyusun</div>
+            <p>Prioritas diurutkan dari <strong>potensi kenaikan skor</strong>, lalu disesuaikan dengan waktu yang kamu punya.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Yang tidak kami janjikan</div>
+            <p>Tidak ada prediksi kelulusan. Yang bisa diukur: kesiapan, kecepatan, konsistensi.</p>
+          </div>
+          <div class="insight">
+            <div class="insight__k">Evaluasi</div>
+            <p>Setiap simulasi baru memperbarui rencana ini otomatis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ UNTUK SIAPA ============================ -->
+<section class="sec" id="untuk-siapa">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Jujur saja</span>
+      <h2 class="h2">Cocok untuk siapa — dan tidak untuk siapa.</h2>
+    </div>
+
+    <div class="fit-grid">
+      <article class="fit fit--yes" data-reveal>
+        <h3><span class="mini" aria-hidden="true">✓</span> Cocok kalau kamu…</h3>
+        <p class="sub">Kamu butuh arah, bukan tambahan materi.</p>
+        <ul>
+          <li><span class="mini" aria-hidden="true">✓</span> Sudah ikut tryout, tapi skor stagnan di kisaran yang sama.</li>
+          <li><span class="mini" aria-hidden="true">✓</span> Belajar mandiri dari HP dan butuh urutan yang jelas.</li>
+          <li><span class="mini" aria-hidden="true">✓</span> Ingin tahu soal mana yang menghabiskan waktumu.</li>
+          <li><span class="mini" aria-hidden="true">✓</span> Siap memperbaiki cara, bukan hanya menambah jam belajar.</li>
+        </ul>
+      </article>
+
+      <article class="fit fit--no" data-reveal style="--d:80ms">
+        <h3><span class="mini" aria-hidden="true">×</span> Belum cocok kalau kamu…</h3>
+        <p class="sub">Bukan karena produknya kurang, tapi kebutuhannya beda.</p>
+        <ul>
+          <li><span class="mini" aria-hidden="true">×</span> Baru pertama kali melihat format SKD dan belum pernah mencoba soal.</li>
+          <li><span class="mini" aria-hidden="true">×</span> Mencari jalan pintas atau bocoran soal.</li>
+          <li><span class="mini" aria-hidden="true">×</span> Butuh bimbingan tatap muka dengan pengajar.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CARA KERJA ============================ -->
+<section class="sec sec--cream" id="cara-kerja">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Cara kerja</span>
+      <h2 class="h2">Enam langkah, satu siklus.</h2>
+      <p class="lead">Setiap siklus berakhir dengan data yang lebih jelas daripada siklus sebelumnya.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step" data-reveal><span class="step__n">01</span><h3>Daftar akun</h3><p>Nama, email, kata sandi. Tidak ada kuesioner panjang.</p></div>
+      <div class="step" data-reveal style="--d:60ms"><span class="step__n">02</span><h3>Pilih simulasi</h3><p>Pilih paket atau simulasi yang tersedia.</p></div>
+      <div class="step" data-reveal style="--d:120ms"><span class="step__n">03</span><h3>Kerjakan ujian</h3><p>Antarmuka CAT dengan timer dan navigasi soal.</p></div>
+      <div class="step" data-reveal style="--d:180ms"><span class="step__n">04</span><h3>Lihat analisis</h3><p>Skor, peta materi, dan jejak waktu per soal.</p></div>
+      <div class="step" data-reveal style="--d:240ms"><span class="step__n">05</span><h3>Pelajari rekomendasi</h3><p>Prioritas latihan yang sudah diurutkan.</p></div>
+      <div class="step" data-reveal style="--d:300ms"><span class="step__n">06</span><h3>Latihan &amp; evaluasi</h3><p>Ulangi, lalu bandingkan progresnya.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROGRAM ============================ -->
+<section class="sec" id="program">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Program</span>
+      <h2 class="h2">Fokus awal: SKD CPNS 2027.</h2>
+      <p class="lead">Struktur simulasi mengikuti tiga bagian SKD. Kerangka yang sama dipakai untuk menyiapkan program berikutnya.</p>
+    </div>
+
+    <div class="prog">
+      <article class="pcard live" data-reveal>
+        <div class="row" style="justify-content:space-between">
+          <h3>SKD CPNS 2027</h3>
+          <span class="badge badge--gold">Fokus</span>
+        </div>
+        <p>Simulasi penuh tiga bagian dengan analisis per materi dan jejak waktu per soal.</p>
+        <div class="pcard__foot">TWK · TIU · TKP</div>
+      </article>
+      <article class="pcard" data-reveal style="--d:80ms">
+        <div class="row" style="justify-content:space-between">
+          <h3>Sekolah Kedinasan</h3>
+          <span class="badge badge--outline">Disiapkan</span>
+        </div>
+        <p>Struktur seleksi berbeda dari SKD. Modul dan komposisi bagian sedang disiapkan.</p>
+        <div class="pcard__foot">Tahap berikutnya</div>
+      </article>
+      <article class="pcard" data-reveal style="--d:160ms">
+        <div class="row" style="justify-content:space-between">
+          <h3>Seleksi lainnya</h3>
+          <span class="badge badge--outline">Disiapkan</span>
+        </div>
+        <p>Kerangka analisis yang sama dapat dipakai untuk jenis ujian lain di kemudian hari.</p>
+        <div class="pcard__foot">Pengembangan</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PAKET ============================ -->
+<section class="sec sec--cream" id="paket">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Paket tryout</span>
+      <h2 class="h2">Pilih sesuai jarak ujianmu.</h2>
+      <p class="lead">Komponen di bawah sudah siap dipakai. Harga dan fasilitas final diisi setelah keputusan bisnis ditetapkan.</p>
+    </div>
+
+    <div class="notice" role="note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16v.2" stroke-linecap="round"/></svg>
+      <span><strong>Placeholder.</strong> Harga, jumlah simulasi, dan fasilitas di bagian ini belum ditetapkan. Ganti teks bertanda <code style="font-weight:700">[—]</code> sebelum publikasi.</span>
+    </div>
+
+    <div class="tiers">
+      <article class="tier" data-reveal>
+        <div class="tier__top"><h3>Latihan</h3><span class="badge badge--outline">Gratis</span></div>
+        <p class="tier__d">Untuk mencoba format CAT dan melihat bentuk analisisnya.</p>
+        <div class="tier__price">Rp [—]<span>/paket</span></div>
+        <div class="tier__note">Harga placeholder</div>
+        <ul class="tier__feat">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> [—] simulasi</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Analisis materi dasar</li>
+          <li class="off"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> Analisis waktu per soal</li>
+          <li class="off"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> Rekomendasi latihan</li>
+        </ul>
+        <a href="daftar/index.html" class="btn btn--outline">Mulai gratis</a>
+      </article>
+
+      <article class="tier tier--pop" data-reveal style="--d:80ms">
+        <div class="tier__top"><h3>Intensif</h3><span class="badge badge--gold">Paling dipilih</span></div>
+        <p class="tier__d">Untuk yang sudah punya target dan butuh arah perbaikan.</p>
+        <div class="tier__price">Rp [—]<span>/paket</span></div>
+        <div class="tier__note">Harga placeholder</div>
+        <ul class="tier__feat">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> [—] simulasi penuh</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Analisis materi &amp; pola kesalahan</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Analisis waktu per soal</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Rekomendasi latihan berurutan</li>
+        </ul>
+        <a href="daftar/index.html" class="btn">Pilih Intensif</a>
+      </article>
+
+      <article class="tier" data-reveal style="--d:160ms">
+        <div class="tier__top"><h3>Prioritas</h3><span class="badge badge--outline">[—]</span></div>
+        <p class="tier__d">Untuk persiapan panjang dengan evaluasi berkala.</p>
+        <div class="tier__price">Rp [—]<span>/paket</span></div>
+        <div class="tier__note">Harga placeholder</div>
+        <ul class="tier__feat">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> [—] simulasi penuh</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Semua analisis di paket Intensif</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-500)" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Riwayat progres antar simulasi</li>
+          <li class="off"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> [—] fitur tambahan</li>
+        </ul>
+        <a href="daftar/index.html" class="btn btn--outline">Pilih Prioritas</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Pertanyaan umum</span>
+      <h2 class="h2">Sebelum kamu mulai.</h2>
+    </div>
+
+    <div class="faq">
+      <details data-reveal>
+        <summary>Apa itu LMS-CAT?</summary>
+        <div class="faq__a"><p>LMS-CAT adalah platform simulasi ujian berbasis Computer Assisted Test (CAT) dengan penekanan pada analisis hasil. Selain mengerjakan soal, kamu mendapat peta materi, jejak waktu pengerjaan, dan rekomendasi latihan berikutnya.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Bagaimana cara kerja analisis hasil?</summary>
+        <div class="faq__a"><p>Setiap jawaban dipetakan ke kategori materi, lalu dibandingkan dengan pola kesalahan pada tipe soal yang sama. Durasi pengerjaan per soal juga dicatat. Hasilnya dirangkum menjadi tiga bagian: penguasaan materi, manajemen waktu, dan rekomendasi latihan.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Apakah tersedia simulasi SKD CPNS?</summary>
+        <div class="faq__a"><p>Ya. Program awal LMS-CAT difokuskan pada SKD CPNS 2027 dengan tiga bagian: TWK, TIU, dan TKP. Komposisi soal dan durasi mengikuti aturan ujian yang berlaku pada sistem.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Bagaimana analisis manajemen waktu membantu peserta?</summary>
+        <div class="faq__a"><p>Kamu bisa melihat soal mana yang menghabiskan waktu terlalu banyak, membandingkan tempo antar bagian, dan mendapat saran pembagian waktu. Tujuannya agar waktu habis di soal yang memang bisa kamu jawab.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Apakah pengguna bisa melihat perkembangan hasil?</summary>
+        <div class="faq__a"><p>Bisa. Setiap simulasi tersimpan, sehingga kamu dapat membandingkan hasil antar tryout pada materi yang sama — bukan hanya melihat kenaikan skor total.</p></div>
+      </details>
+      <details data-reveal>
+        <summary>Apakah tersedia tryout sekolah kedinasan?</summary>
+        <div class="faq__a"><p>Belum. Program sekolah kedinasan sedang disiapkan dan akan diumumkan setelah modulnya siap. Struktur halaman ini sudah mendukung penambahan program tersebut.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FINAL CTA ============================ -->
+<section class="final on-navy glow">
+  <div class="wrap">
+    <span class="eyebrow">Langkah berikutnya</span>
+    <h2 class="h2" style="margin-top:16px">Satu tryout lagi tidak akan mengubah apa pun. Kecuali kamu tahu cara membacanya.</h2>
+    <p>Daftar, kerjakan satu simulasi, dan lihat sendiri bagian mana yang perlu kamu perbaiki lebih dulu.</p>
+    <a href="daftar/index.html" class="btn btn--lg">Daftar Gratis <span aria-hidden="true">→</span></a>
+    <div class="micro">Tanpa data pembayaran untuk mencoba. Analisis langsung tersedia setelah simulasi selesai.</div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <b>LMS·CAT</b>
+        <p>Platform simulasi CAT untuk memahami kelemahan, memperbaiki strategi, dan meningkatkan kesiapan menghadapi ujian.</p>
+      </div>
+      <div>
+        <b>Navigasi</b>
+        <div class="foot-links">
+          <a href="#fitur">Fitur</a>
+          <a href="#cara-kerja">Cara Kerja</a>
+          <a href="#paket">Paket</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <b>Bantuan</b>
+        <div class="foot-links">
+          <a href="#">Pusat Bantuan</a>
+          <a href="#">Hubungi Kami</a>
+        </div>
+      </div>
+      <div>
+        <b>Legal</b>
+        <div class="foot-links">
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Syarat &amp; Ketentuan</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 LMS-CAT. Seluruh hak cipta dilindungi.</span>
+      <span>Angka pada halaman ini bersifat ilustratif dan bukan data pengguna nyata.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ FLOATING CTA ============================ -->
+<div class="fcta" id="fcta" aria-hidden="true">
+  <div class="fcta__in">
+    <div class="fcta__price">
+      <span class="now">Mulai gratis</span>
+      <span class="was">Analisis setelah selesai</span>
+    </div>
+    <a href="daftar/index.html" class="btn">Daftar</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var header = document.getElementById("siteHeader");
+  var onScroll = function () { header.classList.toggle("is-stuck", window.scrollY > 6); };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  var burger = document.getElementById("burger");
+  var mmenu = document.getElementById("mmenu");
+  burger.addEventListener("click", function () {
+    var open = burger.getAttribute("aria-expanded") === "true";
+    burger.setAttribute("aria-expanded", String(!open));
+    burger.setAttribute("aria-label", open ? "Buka menu" : "Tutup menu");
+    mmenu.hidden = open;
+  });
+  mmenu.addEventListener("click", function (e) {
+    if (e.target.closest("a")) { burger.setAttribute("aria-expanded", "false"); mmenu.hidden = true; }
+  });
+
+  /* reveal */
+  var els = document.querySelectorAll("[data-reveal]");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* tabs */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { selectTab(tab); });
+    tab.addEventListener("keydown", function (e) {
+      var next = null;
+      if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+      if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === "Home") next = tabs[0];
+      if (e.key === "End") next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); selectTab(next); next.focus(); }
+    });
+  });
+
+  /* floating cta */
+  var fcta = document.getElementById("fcta");
+  var onF = function () {
+    var show = window.scrollY > 560;
+    fcta.classList.toggle("show", show);
+    fcta.setAttribute("aria-hidden", String(!show));
+  };
+  window.addEventListener("scroll", onF, { passive: true });
+  onF();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* ============================================================================
+   LMS-CAT · DESIGN TOKENS  v2.0  —  "Navy & Gold"
+   Biru dongker sebagai dasar kepercayaan, emas sebagai aksen tunggal.
+   Satu keluarga huruf (Plus Jakarta Sans), sudut besar, tombol pil.
+   Semua nilai warna/ukuran WAJIB lewat token ini.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------------
+     1. NAVY — permukaan gelap, header, seksi penekanan
+     --------------------------------------------------------------------- */
+  --navy-950: #04121F;
+  --navy-900: #061A2F;
+  --navy-800: #0A2540;
+  --navy-700: #123B60;
+  --navy-600: #1B4E78;
+
+  /* ---------------------------------------------------------------------
+     2. GOLD — satu-satunya aksen. Dipakai hemat.
+     --------------------------------------------------------------------- */
+  --gold-600: #C99100;
+  --gold-500: #F5B700;
+  --gold-400: #FFD34D;
+  --gold-200: #FFE9A8;
+  --gold-100: #FEF4DE;
+
+  /* ---------------------------------------------------------------------
+     3. NETRAL — sedikit kebiruan, senada dengan navy
+     --------------------------------------------------------------------- */
+  --ink: #0D1B2A;
+  --body: #48596B;
+  --muted: #7A8B9C;
+  --line: #E4EAF1;
+  --line-strong: #CFD9E4;
+  --cream: #F6F8FB;
+  --white: #FFFFFF;
+
+  /* ---------------------------------------------------------------------
+     4. SEMANTIK
+     --------------------------------------------------------------------- */
+  --green-600: #0B7A44;
+  --green-500: #0F9D58;
+  --green-100: #E4F6EC;
+
+  --amber-600: #8A6100;
+  --amber-500: #C99100;
+  --amber-100: #FEF4DE;
+
+  --red-600: #B33737;
+  --red-500: #D64545;
+  --red-100: #FBE7E7;
+
+  --blue-600: #16588C;
+  --blue-500: #1B6FB5;
+  --blue-100: #E8F1FA;
+
+  /* ---------------------------------------------------------------------
+     5. PERAN SEMANTIK
+     --------------------------------------------------------------------- */
+  --bg: var(--white);
+  --bg-alt: var(--cream);
+  --surface: var(--white);
+  --surface-dark: var(--navy-900);
+
+  --text: var(--ink);
+  --text-2: var(--body);
+  --text-3: var(--muted);
+  --text-invert: #E8F1FA;
+  --text-invert-2: #A9C0D4;
+  --text-invert-3: #8FA6BC;
+
+  --line-soft: #EEF2F7;
+  --line-invert: rgba(255, 255, 255, 0.12);
+  --line-invert-2: rgba(255, 255, 255, 0.2);
+
+  --brand: var(--gold-500);
+  --brand-hover: var(--gold-400);
+  --brand-fg: #231A00;
+  --brand-tint: var(--gold-100);
+  --navy: var(--navy-900);
+
+  --focus: #1B6FB5;
+  --focus-invert: var(--gold-400);
+
+  /* data-viz */
+  --dv-1: #F5B700;
+  --dv-2: #7FB4E8;
+  --dv-3: #0F9D58;
+  --dv-4: #D64545;
+  --dv-5: #8B6BD9;
+  --dv-track: #E4EAF1;
+
+  /* ---------------------------------------------------------------------
+     6. TIPOGRAFI — satu keluarga, banyak bobot
+     --------------------------------------------------------------------- */
+  --font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-2xs: 0.6875rem;  /* 11 */
+  --text-xs: 0.75rem;     /* 12 */
+  --text-sm: 0.84375rem;  /* 13.5 */
+  --text-base: 1rem;      /* 16 */
+  --text-md: 1.0625rem;   /* 17 */
+  --text-lg: 1.25rem;     /* 20 */
+  --text-xl: 1.625rem;    /* 26 */
+  --text-2xl: 2.125rem;   /* 34 */
+
+  --text-display: clamp(1.7rem, 3.1vw, 2.65rem);   /* 27 → 42 */
+  --text-h2: clamp(1.55rem, 3.1vw, 2.5rem);          /* 25 → 40 */
+  --text-h3: clamp(1.05rem, 1.5vw, 1.25rem);         /* 17 → 20 */
+  --text-lead: clamp(0.98rem, 1.35vw, 1.08rem);      /* 16 → 17 */
+
+  --lh-display: 1.16;
+  --lh-heading: 1.18;
+  --lh-body: 1.7;
+
+  --tr-display: -0.03em;
+  --tr-heading: -0.02em;
+  --tr-label: 0.14em;
+
+  /* ---------------------------------------------------------------------
+     7. SPASI & LAYOUT
+     --------------------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+  --sp-10: 6rem;
+
+  --wrap: 1120px;
+  --wrap-narrow: 820px;
+  --gutter: 20px;
+  --section-y: clamp(56px, 7vw, 92px);
+
+  /* ---------------------------------------------------------------------
+     8. BENTUK, BAYANGAN, GERAK
+     --------------------------------------------------------------------- */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(9, 25, 43, 0.06), 0 4px 14px rgba(9, 25, 43, 0.06);
+  --shadow-md: 0 10px 30px rgba(9, 25, 43, 0.10);
+  --shadow-lg: 0 24px 60px rgba(4, 18, 31, 0.18);
+  --shadow-gold: 0 10px 24px rgba(245, 183, 0, 0.32);
+  --shadow-gold-hover: 0 16px 34px rgba(245, 183, 0, 0.40);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-1: 0.18s;
+  --dur-2: 0.3s;
+
+  --z-sticky: 90;
+  --z-modal: 300;
+}
