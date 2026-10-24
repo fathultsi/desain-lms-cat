@@ -1,50 +1,43 @@
-# LMS-CAT — Interface Design v1.0
+# LMS-CAT — Pratinjau Desain
 
-Prototipe antarmuka untuk **LMS-CAT**, platform tryout berbasis Computer Assisted Test (CAT)
-untuk persiapan SKD CPNS 2027.
+Repositori ini menampung **pratinjau statis** antarmuka LMS-CAT, platform tryout
+berbasis Computer Assisted Test (CAT) untuk persiapan SKD CPNS 2027. Tidak ada
+backend di sini; halaman hanya untuk ditinjau bersama tim.
 
-Semua layar dibuat dengan HTML, CSS, dan SVG — tidak ada gambar raster — sehingga bisa
-langsung dibaca, di-resize, dan diimplementasikan oleh programmer.
+## Alamat
 
-## Lihat desainnya
-
-Buka **[`index.html`](index.html)** (halaman hub), lalu pilih salah satu layar:
-
-| Layar | File | Isi |
+| Halaman | Alamat | Isi |
 |---|---|---|
-| Landing page | `landing-page/index.html` | Hero, masalah pengguna, 3 keunggulan, cara kerja, preview analisis bertab, program, paket, FAQ |
-| Masuk | `login/index.html` | Form + panel visual, validasi, loading, error kredensial |
-| Daftar | `register/index.html` | 4 field, indikator kekuatan kata sandi, layar sukses |
-| Ujian CAT | `exam-interface/index.html` | Timer hidup, navigasi 30 soal, penanda ragu-ragu, modal konfirmasi |
+| **Landing page (terbaru)** | [`/app/`](https://fathultsi.github.io/desain-lms-cat/app/) | Ekspor statis dari aplikasi Laravel: hero, keunggulan, peluang & target, contoh laporan, paket, FAQ |
+| Prototipe lama | [`/app-prototipe/`](https://fathultsi.github.io/desain-lms-cat/app-prototipe/) | Prototipe HTML/CSS/JS (localStorage) untuk landing, masuk, daftar, ujian, hasil |
+| Arah desain | [`/directions/`](https://fathultsi.github.io/desain-lms-cat/directions/) | Eksplorasi arah visual |
 
-Setiap halaman responsif: 360px (mobile) sampai 1280px+ (desktop).
-Untuk melihat versi mobile, perkecil jendela browser ke ±390px atau pakai device mode di DevTools.
+## Tentang `/app/`
 
-## Dokumentasi
+Halaman di `/app/` **dihasilkan otomatis** dari aplikasi LMS-CAT
+(`node scripts/export-static.mjs`), bukan ditulis tangan. Yang perlu diketahui saat meninjau:
 
-- [`design-spec.md`](design-spec.md) — tujuan, persona, struktur tiap halaman, perilaku, catatan implementasi
-- [`design-system.md`](design-system.md) — token warna, tipografi, spasi, komponen, aksesibilitas
-- [`user-flow.md`](user-flow.md) — enam alur utama, percabangan, edge case
+- Tampilan, tipografi, animasi, dan interaksi (tab laporan, menu ponsel, FAQ) berjalan
+  sama seperti di aplikasi.
+- Seluruh tautan menuju pendaftaran/masuk dinonaktifkan (`#`) karena tidak ada
+  backend di balik pratinjau ini.
+- **Katalog paket berasal dari basis data pengembangan**, sehingga masih memuat entri
+  uji. Harga dan nama paket belum final.
+- Semua angka pada contoh laporan diberi label **“Data ilustratif”** dan bukan data
+  pengguna nyata.
 
-## Struktur
+Jangan menyunting berkas di `/app/` secara langsung — perubahan akan tertimpa pada
+ekspor berikutnya. Perbaikan dilakukan di repositori aplikasi, lalu diekspor ulang.
 
-```
-├── index.html              hub / daftar layar
-├── landing-page/           index.html
-├── login/                  index.html
-├── register/               index.html
-├── exam-interface/         index.html
-├── assets/
-│   ├── tokens.css          semua design token
-│   ├── base.css            reset + komponen dasar
-│   ├── fonts.css           @font-face
-│   └── fonts/*.woff2       Bricolage Grotesque, Plus Jakarta Sans, JetBrains Mono
-└── *.md                    dokumentasi
-```
+## Dokumentasi desain
+
+- [`design-spec.md`](design-spec.md) — tujuan, persona, struktur halaman, perilaku
+- [`design-system.md`](design-system.md) — token warna, tipografi, spasi, komponen
+- `assets/` — token dan CSS dasar yang dipakai halaman arah desain
 
 ## Catatan
 
-- Semua angka pada contoh analisis bersifat **ilustratif** dan diberi label.
-- Harga paket memakai placeholder `Rp [—]` sampai keputusan bisnis ditetapkan.
-- Panel “Pratinjau state prototipe” (login/daftar) dan chip “Demo sisa …” (ujian) adalah
-  alat bantu demo — hapus sebelum produksi.
+- Prototipe di `/app-prototipe/` disimpan sebagai arsip; isinya sudah digantikan oleh
+  implementasi sebenarnya di `/app/`.
+- Panel “Pratinjau state prototipe” dan chip demo di dalam arsip itu adalah alat bantu
+  presentasi, bukan bagian produk.
